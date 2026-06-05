@@ -1,13 +1,39 @@
-fetch('header.html')
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('page-header').innerHTML = html;
-        })
-        .then(() => fetch('navbar.html'))
-        .then(response => response.text())
-        .then(html => {
-          document.getElementById('navbar-slot').innerHTML = html;
-        })
-        .catch(error => {
-          console.error('Falha ao carregar o cabeçalho ou a navbar:', error);
-        });
+async function loadComponents() {
+  try {
+    // HEADER
+    const headerResponse = await fetch('/pages/header.html');
+
+    if (!headerResponse.ok) {
+      throw new Error(
+        `Header não encontrado: ${headerResponse.status}`
+      );
+    }
+
+    const headerHtml = await headerResponse.text();
+
+    document.getElementById('page-header').innerHTML =
+      headerHtml;
+
+    // NAVBAR
+    const navbarResponse = await fetch(
+      '/pages/navbar.html'
+    );
+
+    if (!navbarResponse.ok) {
+      throw new Error(
+        `Navbar não encontrada: ${navbarResponse.status}`
+      );
+    }
+
+    const navbarHtml = await navbarResponse.text();
+
+    document.getElementById('navbar-slot').innerHTML =
+      navbarHtml;
+
+    console.log('Componentes carregados!');
+  } catch (error) {
+    console.error('Erro ao carregar:', error);
+  }
+}
+
+loadComponents();
