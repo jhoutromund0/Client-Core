@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sobre - Cliente Core</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --color-gold: #c5bdb1;
+            --color-dark: #1a1d26;
+            --color-darker: #0f1419;
+            --color-border: #333847;
+            --color-gray: #9ca3af;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 40px rgba(197, 189, 177, 0.12);
+        }
+
+        .glass-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-[#1a1d26] text-white antialiased overflow-x-hidden">
+
+    <!-- COMPONENTES -->
+    <div id="page-header"></div>
+    <div id="navbar-slot"></div>
+
+    <script src="../scripts/home.js"></script>
+
+    <!-- BACKGROUND -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-[-120px] left-[-120px] w-[400px] h-[400px] bg-[#c5bdb1]/10 blur-[150px] rounded-full"></div>
+
+        <div class="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-[#c5bdb1]/5 blur-[120px] rounded-full"></div>
+    </div>
+
+    <!-- HERO -->
+    <section class="pt-44 pb-24 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+
+            <div class="inline-flex items-center gap-2 border border-[#333847] bg-white/[0.02] rounded-full px-4 py-2 mb-8 text-sm text-[#c5bdb1]">
+                Sobre o Cliente Core
+            </div>
+
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
+                Construído para
+                <span class="text-[#c5bdb1]">
+                    simplificar
+                </span>
+                a operação de empresas de TI.
+            </h1>
+
+            <p class="text-[#9ca3af] text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+                O Cliente Core nasceu para eliminar processos manuais,
+                centralizar informações e ajudar terceirizadas de TI
+                a operarem com mais eficiência, organização e escala.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- POR QUE EXISTE -->
+    <section class="py-24 px-6 border-t border-[#333847]">
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+
+            <div>
+
+                <span class="text-[#c5bdb1] uppercase tracking-[0.2em] text-sm">
+                    -- Criação --
+                </span>
+
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-8 leading-tight">
+                    -- Por que existe --
+                </h2>
+
+                <div class="space-y-6 text-[#9ca3af] text-lg leading-relaxed">
+
+                    <p>
+                        -- Ah preencher --
+                    </p>
+
+                    <p>
+                        -- Ah preencher --
+                    </p>
+
+                    <p>
+                        -- Ah preencher --
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="glass-card rounded-[36px] p-8 lg:p-10">
+
+                <div class="space-y-6">
+
+                    <div class="bg-[#0f1419] border border-[#333847] rounded-[28px] p-6">
+                        <h3 class="font-semibold text-[#c5bdb1] mb-3">
+                            Cadastro inteligente
+                        </h3>
+
+                        <p class="text-[#9ca3af] leading-relaxed">
+                            Busque automaticamente dados do cliente apenas
+                            com o CNPJ, reduzindo erros e acelerando processos.
+                        </p>
+                    </div>
+
+                    <div class="bg-[#0f1419] border border-[#333847] rounded-[28px] p-6">
+                        <h3 class="font-semibold text-[#c5bdb1] mb-3">
+                            Operação centralizada
+                        </h3>
+
+                        <p class="text-[#9ca3af] leading-relaxed">
+                            Clientes, estoque, visitas técnicas e cobranças
+                            em um único ambiente.
+                        </p>
+                    </div>
+
+                    <div class="bg-[#0f1419] border border-[#333847] rounded-[28px] p-6">
+                        <h3 class="font-semibold text-[#c5bdb1] mb-3">
+                            Foco em escalabilidade
+                        </h3>
+
+                        <p class="text-[#9ca3af] leading-relaxed">
+                            Estruturado para empresas que atendem múltiplos clientes
+                            e precisam crescer sem perder organização.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MISSÃO VISÃO -->
+    <section class="py-24 px-6">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-20">
+                <span class="text-[#c5bdb1] uppercase tracking-[0.2em] text-sm">
+                    Nossa essência
+                </span>
+
+                <h2 class="text-4xl md:text-5xl font-bold mt-4">
+                    O que nos move
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+
+                <!-- MISSÃO -->
+                <div class="glass-card rounded-[36px] p-10">
+                    <div class="text-5xl mb-6">
+                        🎯
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mb-5">
+                        Missão
+                    </h3>
+
+                    <p class="text-[#9ca3af] leading-relaxed">
+                        -- Ah preencher --
+                    </p>
+                </div>
+
+                <!-- VISÃO -->
+                <div class="glass-card rounded-[36px] p-10">
+                    <div class="text-5xl mb-6">
+                        🚀
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mb-5">
+                        Visão
+                    </h3>
+
+                    <p class="text-[#9ca3af] leading-relaxed">
+                        -- Ah preencher --
+                    </p>
+                </div>
+
+                <!-- DIFERENCIAL -->
+                <div class="glass-card rounded-[36px] p-10">
+                    <div class="text-5xl mb-6">
+                        ✨
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mb-5">
+                       Valores
+                    </h3>
+
+                    <p class="text-[#9ca3af] leading-relaxed">
+                        -- Ah preencher --
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOCO -->
+    <section class="py-24 px-6 border-y border-[#333847]">
+
+        <div class="max-w-7xl mx-auto text-center">
+
+            <span class="text-[#c5bdb1] uppercase tracking-[0.2em] text-sm">
+                Nosso foco
+            </span>
+
+            <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-8">
+                Desenvolvido para
+                terceirizadas de TI
+            </h2>
+
+            <p class="text-[#9ca3af] text-lg max-w-3xl mx-auto leading-relaxed mb-16">
+                Entendemos a rotina de empresas que atendem dezenas de clientes,
+                realizam visitas técnicas, controlam materiais e precisam manter
+                tudo organizado sem burocracia.
+            </p>
+
+            <div class="grid md:grid-cols-4 gap-6">
+
+                <div class="glass-card rounded-[28px] p-8">
+                    <div class="text-4xl mb-4">🏢</div>
+                    <h4 class="font-semibold mb-3">
+                        Gestão de clientes
+                    </h4>
+                    <p class="text-[#9ca3af] text-sm">
+                        Centralize todas as empresas atendidas.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-[28px] p-8">
+                    <div class="text-4xl mb-4">📦</div>
+                    <h4 class="font-semibold mb-3">
+                        Estoque
+                    </h4>
+                    <p class="text-[#9ca3af] text-sm">
+                        Controle materiais e custos operacionais.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-[28px] p-8">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h4 class="font-semibold mb-3">
+                        Agenda técnica
+                    </h4>
+                    <p class="text-[#9ca3af] text-sm">
+                        Organize atendimentos e visitas.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-[28px] p-8">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h4 class="font-semibold mb-3">
+                        Cobranças
+                    </h4>
+                    <p class="text-[#9ca3af] text-sm">
+                        Defina valores e acompanhe serviços.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-28 px-6">
+
+        <div class="max-w-6xl mx-auto">
+
+            <div class="relative overflow-hidden bg-gradient-to-br from-[#0f1419] to-[#1a1d26] border border-[#333847] rounded-[40px] p-14 text-center">
+
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#c5bdb1]/10 blur-[120px]"></div>
+
+                <div class="relative z-10">
+
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Faça sua operação crescer com mais organização.
+                    </h2>
+
+                    <p class="text-[#9ca3af] text-lg max-w-2xl mx-auto mb-10">
+                        Centralize sua gestão, reduza processos manuais
+                        e foque no que realmente importa: seus clientes.
+                    </p>
+
+                    <button class="bg-[#c5bdb1] text-[#1a1d26] hover:bg-[#d7cec2] px-10 py-5 rounded-2xl font-semibold transition gold-glow">
+                        Entre em contato
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-[#333847]">
+
+        <div class="max-w-7xl mx-auto px-8 py-16">
+
+            <div class="flex flex-col md:flex-row justify-between gap-12">
+
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full border border-[#c5bdb1] flex items-center justify-center text-[#c5bdb1] font-bold">
+                            C
+                        </div>
+
+                        <span class="text-xl font-semibold">
+                            Cliente
+                            <span class="text-[#c5bdb1]">
+                                Core
+                            </span>
+                        </span>
+                    </div>
+
+                    <p class="text-[#9ca3af] max-w-sm">
+                        Plataforma criada para transformar a operação
+                        de empresas terceirizadas de TI.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-10 text-sm">
+
+                    <div>
+                        <h4 class="font-semibold mb-4">Produto</h4>
+                        <div class="space-y-3 text-[#9ca3af]">
+                            <p>Recursos</p>
+                            <p>Soluções</p>
+                            <p>Demonstração</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-4">Empresa</h4>
+                        <div class="space-y-3 text-[#9ca3af]">
+                            <p>Sobre</p>
+                            <p>Contato</p>
+                            <p>Parceiros</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-4">Legal</h4>
+                        <div class="space-y-3 text-[#9ca3af]">
+                            <p>Privacidade</p>
+                            <p>Termos</p>
+                            <p>Cookies</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="border-t border-[#333847] mt-12 pt-8 text-center text-sm text-[#6b7280]">
+                © 2026 Cliente Core. Todos os direitos reservados.
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
+```

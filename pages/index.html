@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitus – Segurança e Tecnologia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-[#1a1c1a] text-[#f0f0f0] font-sans">
+
+  <div id="monitus-nav-slot"></div>
+
+  
+  <section
+    class="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6 py-24"
+    style="background: radial-gradient(ellipse 72% 48% at 50% 0%, rgba(62,180,73,0.13) 0%, transparent 65%), #1a1c1a;">
+
+    
+
+
+    </div>
+  
+  </section>
+
+  <script>
+    fetch('/components/monitus-nav.html')
+      .then(resp => {
+        if (!resp.ok) throw new Error('Monitus nav não encontrado');
+        return resp.text();
+      })
+      .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
+      .catch(err => console.error('Erro ao carregar monitus-nav:', err));
+  </script>
+
+</body>
+</html>

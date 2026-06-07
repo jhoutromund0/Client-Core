@@ -1,7 +1,7 @@
 async function loadComponents() {
   try {
     // HEADER
-    const headerResponse = await fetch('/pages/header.html');
+    const headerResponse = await fetch('/components/header.html');
 
     if (!headerResponse.ok) {
       throw new Error(
@@ -16,7 +16,7 @@ async function loadComponents() {
 
     // NAVBAR
     const navbarResponse = await fetch(
-      '/pages/navbar.html'
+      '/components/navbar.html'
     );
 
     if (!navbarResponse.ok) {
@@ -29,6 +29,22 @@ async function loadComponents() {
 
     document.getElementById('navbar-slot').innerHTML =
       navbarHtml;
+
+    // HERO
+    const heroResponse = await fetch('/components/hero.html');
+    if (!heroResponse.ok) {
+      throw new Error(`Hero não encontrado: ${heroResponse.status}`);
+    }
+    const heroHtml = await heroResponse.text();
+    document.getElementById('hero-slot').innerHTML = heroHtml;
+
+    // FOOTER
+    const footerResponse = await fetch('/components/footer.html');
+    if (!footerResponse.ok) {
+      throw new Error(`Footer não encontrado: ${footerResponse.status}`);
+    }
+    const footerHtml = await footerResponse.text();
+    document.getElementById('footer-slot').innerHTML = footerHtml;
 
     console.log('Componentes carregados!');
   } catch (error) {
