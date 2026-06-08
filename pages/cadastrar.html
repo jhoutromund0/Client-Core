@@ -23,13 +23,14 @@
       <form class="grid gap-6" autocomplete="off">
         <div class="grid gap-6 sm:grid-cols-2">
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="cnpj-label" class="font-medium text-[#f8faf7]">CNPJ</span>
-            <input type="text" placeholder="00.000.000/0000-00" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <span class="font-medium text-[#f8faf7]">CNPJ</span>
+            <input id="cnpj" type="text" placeholder="00.000.000/0000-00" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <p id="cnpj-status" class="text-xs text-[#c5bdb1]/70 min-h-[1.25rem]">Digite o CNPJ para buscar automaticamente.</p>
           </label>
 
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="indicador-label" class="font-medium text-[#f8faf7]">Indicador Matriz/Filial</span>
-            <select class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20">
+            <span class="font-medium text-[#f8faf7]">Indicador Matriz/Filial</span>
+            <select id="indicador" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20">
               <option value="matriz">Matriz</option>
               <option value="filial">Filial</option>
             </select>
@@ -37,36 +38,36 @@
         </div>
 
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-          <span id="nome-empresarial-label" class="font-medium text-[#f8faf7]">Nome Empresarial</span>
-          <input type="text" placeholder="Nome da empresa" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+          <span class="font-medium text-[#f8faf7]">Nome Empresarial</span>
+          <input id="nome-empresarial" type="text" placeholder="Nome da empresa" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
         </label>
 
         <div class="grid gap-6 sm:grid-cols-2">
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="telefone-label" class="font-medium text-[#f8faf7]">Telefone</span>
-            <input type="tel" placeholder="(00) 00000-0000" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <span class="font-medium text-[#f8faf7]">Telefone</span>
+            <input id="telefone" type="tel" placeholder="(00) 00000-0000" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
           </label>
 
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="email-label" class="font-medium text-[#f8faf7]">Email</span>
-            <input type="email" placeholder="contato@empresa.com" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <span class="font-medium text-[#f8faf7]">Email</span>
+            <input id="email" type="email" placeholder="contato@empresa.com" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
           </label>
         </div>
 
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-          <span id="endereço-label" class="font-medium text-[#f8faf7]">Endereço</span>
-          <input type="text" placeholder="Rua, número, bairro, cidade" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+          <span class="font-medium text-[#f8faf7]">Endereço</span>
+          <input id="endereco" type="text" placeholder="Rua, número, bairro, cidade" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
         </label>
 
         <div class="grid gap-6 sm:grid-cols-2">
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="referencia-label" class="font-medium text-[#f8faf7]">Referência</span>
-            <input type="text" placeholder="Perto de..." class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <span class="font-medium text-[#f8faf7]">Referência</span>
+            <input id="referencia" type="text" placeholder="Perto de..." class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
           </label>
 
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
-            <span id="complemento-label" class="font-medium text-[#f8faf7]">Complemento</span>
-            <input type="text" placeholder="Sala, bloco, complemento" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            <span class="font-medium text-[#f8faf7]">Complemento</span>
+            <input id="complemento" type="text" placeholder="Sala, bloco, complemento" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
           </label>
         </div>
 
@@ -87,5 +88,6 @@
       .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
       .catch(err => console.error('Erro ao carregar monitus-nav:', err));
   </script>
+  <script type="module" src="../scripts/cadastrar.js"></script>
 </body>
 </html>
