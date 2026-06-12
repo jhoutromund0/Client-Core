@@ -37,6 +37,11 @@ export async function buscarCNPJ(cnpj) {
 
         // NORMALIZAÇÃO
         const normalized = {
+            name:
+                data.company?.name ||
+                data.alias ||
+                '',
+
             nome:
                 data.company?.name ||
                 data.alias ||

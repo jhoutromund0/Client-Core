@@ -2,9 +2,9 @@ import {
     collection,
     addDoc,
     serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-import { db } from "../firebase.js";
+import { db } from "../../../firebase/firebase.js";
 
 export async function salvarCliente(
     empresaIdOuCliente,

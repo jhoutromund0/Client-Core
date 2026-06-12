@@ -1,5 +1,5 @@
-import { buscarCNPJ } from '../src/services/cnpj.js';
-import { salvarCliente } from '../src/services/clientes.js';
+import { buscarCNPJ } from '../scripts/services/cnpj.js';
+import { salvarCliente } from './clientes.js';
 
 const form = document.querySelector('form');
 const cnpjInput = document.getElementById('cnpj');
@@ -44,7 +44,7 @@ const setStatus = (message, type = 'info') => {
 };
 
 const preencherCampos = (dados) => {
-  nomeEmpresarialInput.value = dados.nome || dados.fantasia || '';
+  nomeEmpresarialInput.value = dados.name || dados.fantasia || '';
   telefoneInput.value = dados.telefone || '';
   emailInput.value = dados.email || '';
 
