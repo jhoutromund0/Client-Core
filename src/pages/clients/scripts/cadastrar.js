@@ -1,5 +1,7 @@
-import { buscarCNPJ } from '../scripts/services/cnpj.js';
+import { buscarCNPJ } from './services/cnpj.js';
 import { salvarCliente } from './clientes.js';
+
+import { db } from "../../../firebase/firebase.js";
 
 const form = document.querySelector('form');
 const cnpjInput = document.getElementById('cnpj');
@@ -96,6 +98,19 @@ const montarCliente = () => ({
   complemento: complementoInput.value.trim(),
 });
 
+const promiseTimeout = (promise, ms) => {
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error('Tempo esgotado ao salvar. Verifique a conexão.'));
+    }, ms);
+  });
+
+  return Promise.race([promise, timeout]).finally(() => {
+    clearTimeout(timeoutId);
+  });
+};
+
 cnpjInput.addEventListener('input', (event) => {
   const formatted = formatarCNPJ(event.target.value);
   event.target.value = formatted;
@@ -148,10 +163,13 @@ form.addEventListener('submit', async (event) => {
   setStatus('Salvando cliente...');
 
   try {
-    await salvarCliente(cliente);
+    console.debug('Iniciando cadastro do cliente:', cliente);
+    await promiseTimeout(salvarCliente(cliente), 15000);
+    console.debug('Cadastro do cliente concluído.');
     form.reset();
     setStatus('Cliente cadastrado com sucesso.', 'success');
   } catch (error) {
+    console.error('Erro no envio do cliente:', error);
     setStatus(error.message || 'Nao foi possivel cadastrar o cliente.', 'error');
   } finally {
     submitButton.disabled = false;

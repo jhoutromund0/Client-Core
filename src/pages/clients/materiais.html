@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitus - Materiais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#1a1c1a] text-[#f0f0f0] font-sans">
+  <div id="monitus-nav-slot"></div>
+
+  <main class="min-h-[calc(100vh-64px)] px-6 py-10">
+    <section class="mx-auto flex w-full max-w-6xl flex-col gap-8">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7cf887]">Estoque</p>
+          <h1 class="mt-3 text-4xl font-extrabold text-white sm:text-5xl">Materiais</h1>
+          <p class="mt-3 max-w-2xl text-sm leading-6 text-[#c5bdb1]/80">
+            Controle os materiais por quantidade, metro ou kg, com valores calculados por tipo de uso.
+          </p>
+        </div>
+
+        <div class="flex rounded-3xl border border-[#3eb449]/20 bg-[#111314] p-1">
+          <button id="novo-material" type="button" class="rounded-[1.25rem] bg-[#3eb449] px-5 py-3 text-sm font-semibold text-[#0f1419] transition hover:bg-[#62d06d]">
+            Novo Material
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-5">
+          <p class="text-sm text-[#c5bdb1]/70">Itens cadastrados</p>
+          <p id="total-itens" class="mt-3 text-3xl font-extrabold text-white">0</p>
+        </div>
+
+        <div class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-5">
+          <p class="text-sm text-[#c5bdb1]/70">Medida total</p>
+          <p id="total-medida" class="mt-3 text-3xl font-extrabold text-white">0</p>
+        </div>
+
+        <div class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-5">
+          <p class="text-sm text-[#c5bdb1]/70">Valor em estoque</p>
+          <p id="valor-total" class="mt-3 text-3xl font-extrabold text-white">R$ 0,00</p>
+        </div>
+      </div>
+
+      <section class="grid gap-6 lg:grid-cols-[360px_1fr]">
+        <form id="material-form" class="self-start rounded-[2rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 shadow-[0_32px_100px_rgba(0,0,0,0.28)]" autocomplete="off">
+          <div class="mb-6">
+            <h2 id="form-title" class="text-2xl font-bold text-white">Adicionar material</h2>
+            <p id="form-status" class="mt-2 min-h-[1.25rem] text-xs text-[#c5bdb1]/70"></p>
+          </div>
+
+          <input id="material-id" type="hidden" />
+
+          <div class="grid gap-5">
+            <label class="space-y-2 text-sm text-[#c5bdb1]/90">
+              <span class="font-medium text-[#f8faf7]">Nome</span>
+              <input id="material-nome" type="text" placeholder="Ex: Cabo CAT6" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            </label>
+
+            <label class="space-y-2 text-sm text-[#c5bdb1]/90">
+              <span class="font-medium text-[#f8faf7]">Controle por</span>
+              <select id="material-tipo-medida" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20">
+                <option value="quantidade">Quantidade</option>
+                <option value="comprimento">Comprimento</option>
+              </select>
+            </label>
+
+            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+              <label class="space-y-2 text-sm text-[#c5bdb1]/90">
+                <span id="medida-label" class="font-medium text-[#f8faf7]">Quantidade</span>
+                <input id="material-medida" type="number" min="0" step="0.01" placeholder="0" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+              </label>
+
+              <label id="unidade-medida-wrapper" class="hidden space-y-2 text-sm text-[#c5bdb1]/90">
+                <span class="font-medium text-[#f8faf7]">Unidade</span>
+                <select id="material-unidade-medida" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20">
+                  <option value="m">Metro</option>
+                  <option value="kg">Kg</option>
+                </select>
+              </label>
+
+              <label class="space-y-2 text-sm text-[#c5bdb1]/90">
+                <span id="valor-label" class="font-medium text-[#f8faf7]">Valor unitario</span>
+                <input id="material-valor" type="number" min="0" step="0.01" placeholder="0,00" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+              </label>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <button id="submit-material" type="submit" class="inline-flex flex-1 items-center justify-center rounded-3xl bg-[#3eb449] px-6 py-4 text-sm font-semibold text-[#0f1419] transition hover:bg-[#62d06d]">
+              Salvar Material
+            </button>
+            <button id="cancelar-edicao" type="button" class="hidden inline-flex flex-1 items-center justify-center rounded-3xl border border-[#3eb449]/25 px-6 py-4 text-sm font-semibold text-[#d1d5db] transition hover:bg-white/5 hover:text-white">
+              Cancelar
+            </button>
+          </div>
+        </form>
+
+        <section class="rounded-[2rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
+          <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-white">Lista de materiais</h2>
+              <p id="lista-status" class="mt-2 text-sm text-[#c5bdb1]/70">Carregando materiais...</p>
+            </div>
+
+            <label class="w-full md:max-w-xs">
+              <span class="sr-only">Buscar material</span>
+              <input id="buscar-material" type="search" placeholder="Buscar material" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+            </label>
+          </div>
+
+          <div class="overflow-hidden rounded-[1.5rem] border border-[#3eb449]/10">
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[820px] text-left text-sm">
+                <thead class="bg-[#111314] text-xs uppercase tracking-[0.16em] text-[#c5bdb1]/70">
+                  <tr>
+                    <th class="px-5 py-4 font-semibold">ID</th>
+                    <th class="px-5 py-4 font-semibold">Nome</th>
+                    <th class="px-5 py-4 font-semibold">Tipo</th>
+                    <th class="px-5 py-4 font-semibold">Medida</th>
+                    <th class="px-5 py-4 font-semibold">Valor</th>
+                    <th class="px-5 py-4 font-semibold">Total</th>
+                    <th class="px-5 py-4 text-right font-semibold">Acoes</th>
+                  </tr>
+                </thead>
+                <tbody id="materiais-lista" class="divide-y divide-[#3eb449]/10 bg-[#171a18]"></tbody>
+              </table>
+            </div>
+
+            <div id="lista-vazia" class="hidden bg-[#171a18] px-5 py-12 text-center">
+              <p class="text-sm font-semibold text-white">Nenhum material encontrado.</p>
+              <p class="mt-2 text-sm text-[#c5bdb1]/70">Cadastre um novo item para iniciar o controle.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    fetch('/components/monitus-nav.html')
+      .then(resp => {
+        if (!resp.ok) throw new Error('Monitus nav nao encontrado');
+        return resp.text();
+      })
+      .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
+      .catch(err => console.error('Erro ao carregar monitus-nav:', err));
+  </script>
+  <script type="module" src="./scripts/materiais.js"></script>
+</body>
+</html>

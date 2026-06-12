@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitus – Consulta de Clientes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="min-h-screen bg-[#1a1c1a] text-[#f0f0f0] font-sans">
+  <div id="monitus-nav-slot"></div>
+
+  <main class="min-h-[calc(100vh-64px)] px-6 py-10">
+    <section class="mx-auto w-full max-w-6xl">
+      <div class="mb-8 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7cf887]">Consulta</p>
+          <h1 class="mt-3 text-4xl font-extrabold text-white">Consultar Clientes</h1>
+          <p class="mt-3 text-sm text-[#c5bdb1]/80">Busque e visualize clientes cadastrados.</p>
+        </div>
+      </div>
+
+      <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 mb-6">
+        <div class="flex gap-4 items-center">
+          <label class="w-full md:max-w-lg">
+            <span class="sr-only">Buscar cliente</span>
+            <input id="buscar-cliente" type="search" placeholder="Buscar por nome, CNPJ ou telefone" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+          </label>
+          <div class="text-sm text-[#c5bdb1]/80">Total: <span id="total-clientes">0</span></div>
+        </div>
+      </section>
+
+      <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6">
+        <div class="overflow-hidden rounded-[1.5rem] border border-[#3eb449]/10">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[820px] text-left text-sm">
+              <thead class="bg-[#111314] text-xs uppercase tracking-[0.16em] text-[#c5bdb1]/70">
+                <tr>
+                  <th class="px-5 py-4 font-semibold">ID</th>
+                  <th class="px-5 py-4 font-semibold">Nome</th>
+                  <th class="px-5 py-4 font-semibold">CNPJ</th>
+                  <th class="px-5 py-4 font-semibold">Telefone</th>
+                  <th class="px-5 py-4 font-semibold">Email</th>
+                  <th class="px-5 py-4 text-right font-semibold">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="clientes-lista" class="divide-y divide-[#3eb449]/10 bg-[#171a18]"></tbody>
+            </table>
+          </div>
+
+          <div id="lista-vazia" class="hidden bg-[#171a18] px-5 py-12 text-center">
+            <p class="text-sm font-semibold text-white">Nenhum cliente encontrado.</p>
+            <p class="mt-2 text-sm text-[#c5bdb1]/70">Cadastre clientes em 'Cadastrar Cliente'.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-6 rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6">
+        <h2 class="text-2xl font-bold text-white">Detalhes do cliente</h2>
+        <div id="cliente-detalhes" class="mt-4 text-sm text-[#c5bdb1]/80">Selecione um cliente para ver os detalhes.</div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="/pages/clients/scripts/consulta.js"></script>
+  <script>
+    fetch('/components/monitus-nav.html')
+      .then(resp => { if (!resp.ok) throw new Error('Monitus nav não encontrado'); return resp.text(); })
+      .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
+      .catch(err => console.error('Erro ao carregar monitus-nav:', err));
+  </script>
+</body>
+</html>

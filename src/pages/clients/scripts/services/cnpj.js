@@ -16,9 +16,12 @@ export async function buscarCNPJ(cnpj) {
 
     try {
 
-        const res = await fetch(
-            `${BASE_URL}/${cnpjLimpo}`
-        );
+        const functionUrl = `/api/buscarCNPJ?cnpj=${cnpjLimpo}`;
+        let res = await fetch(functionUrl);
+
+        if (!res.ok) {
+            res = await fetch(`${BASE_URL}/${cnpjLimpo}`);
+        }
 
         if (!res.ok) {
             throw new Error(
