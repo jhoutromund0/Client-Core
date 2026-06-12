@@ -1,5 +1,7 @@
 import { buscarCNPJ } from '../src/services/cnpj.js';
+import { salvarCliente } from '../src/services/clientes.js';
 
+const form = document.querySelector('form');
 const cnpjInput = document.getElementById('cnpj');
 const indicadorSelect = document.getElementById('indicador');
 const nomeEmpresarialInput = document.getElementById('nome-empresarial');
@@ -9,12 +11,15 @@ const enderecoInput = document.getElementById('endereco');
 const referenciaInput = document.getElementById('referencia');
 const complementoInput = document.getElementById('complemento');
 const cnpjStatus = document.getElementById('cnpj-status');
+const submitButton = form.querySelector('button[type="submit"]');
 
 let debounceTimer = null;
 
 const limparCNPJ = (value) => value.replace(/\D/g, '');
+
 const formatarCNPJ = (value) => {
   const digits = limparCNPJ(value);
+
   return digits
     .replace(/(\d{2})(\d)/, '$1.$2')
     .replace(/(\d{3})(\d)/, '$1.$2')
@@ -63,8 +68,9 @@ const preencherCampos = (dados) => {
 
 const processarCNPJ = async () => {
   const cnpj = limparCNPJ(cnpjInput.value);
+
   if (cnpj.length !== 14) {
-    setStatus('Informe os 14 dígitos do CNPJ para buscar os dados.', 'warning');
+    setStatus('Informe os 14 digitos do CNPJ para buscar os dados.', 'warning');
     return;
   }
 
@@ -75,18 +81,30 @@ const processarCNPJ = async () => {
     preencherCampos(dados);
     setStatus('Dados preenchidos automaticamente.', 'success');
   } catch (error) {
-    setStatus(error.message || 'Não foi possível buscar o CNPJ.', 'error');
+    setStatus(error.message || 'Nao foi possivel buscar o CNPJ.', 'error');
   }
 };
+
+const montarCliente = () => ({
+  cnpj: cnpjInput.value,
+  indicador: indicadorSelect.value,
+  nomeEmpresarial: nomeEmpresarialInput.value.trim(),
+  telefone: telefoneInput.value.trim(),
+  email: emailInput.value.trim(),
+  endereco: enderecoInput.value.trim(),
+  referencia: referenciaInput.value.trim(),
+  complemento: complementoInput.value.trim(),
+});
 
 cnpjInput.addEventListener('input', (event) => {
   const formatted = formatarCNPJ(event.target.value);
   event.target.value = formatted;
 
   const cnpj = limparCNPJ(formatted);
+
   if (cnpj.length < 14) {
     if (debounceTimer) clearTimeout(debounceTimer);
-    setStatus('Digite os 14 dígitos do CNPJ para auto completar.');
+    setStatus('Digite os 14 digitos do CNPJ para auto completar.');
     return;
   }
 
@@ -94,9 +112,9 @@ cnpjInput.addEventListener('input', (event) => {
   debounceTimer = setTimeout(processarCNPJ, 600);
 });
 
-// opcional: preencher automatico ao perder o foco, caso não tenha buscado ainda
 cnpjInput.addEventListener('blur', () => {
   const cnpj = limparCNPJ(cnpjInput.value);
+
   if (cnpj.length === 14) {
     processarCNPJ();
   }
@@ -105,5 +123,38 @@ cnpjInput.addEventListener('blur', () => {
 referenciaInput.addEventListener('input', () => {
   if (!referenciaInput.value) {
     referenciaInput.removeAttribute('placeholder');
+  }
+});
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const cliente = montarCliente();
+
+  if (limparCNPJ(cliente.cnpj).length !== 14) {
+    setStatus('Informe um CNPJ valido antes de cadastrar.', 'warning');
+    cnpjInput.focus();
+    return;
+  }
+
+  if (!cliente.nomeEmpresarial) {
+    setStatus('Informe o nome empresarial antes de cadastrar.', 'warning');
+    nomeEmpresarialInput.focus();
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Cadastrando...';
+  setStatus('Salvando cliente...');
+
+  try {
+    await salvarCliente(cliente);
+    form.reset();
+    setStatus('Cliente cadastrado com sucesso.', 'success');
+  } catch (error) {
+    setStatus(error.message || 'Nao foi possivel cadastrar o cliente.', 'error');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Cadastrar Cliente';
   }
 });
