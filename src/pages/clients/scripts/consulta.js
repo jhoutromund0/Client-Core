@@ -15,11 +15,15 @@ let filtro = "";
 const formatCNPJ = (value) => value ? value.replace(/\D/g, '').replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5') : '';
 
 const carregarClientes = async () => {
+  detalhesEl.textContent = 'Carregando clientes...';
+  detalhesEl.setAttribute('role', 'status');
+  detalhesEl.setAttribute('aria-live', 'polite');
   try {
     const q = query(clientesRef, orderBy('nomeEmpresarial', 'asc'));
     const snapshot = await getDocs(q);
     clientes = snapshot.docs.map(s => ({ id: s.id, ...s.data() }));
     renderizarLista();
+    detalhesEl.textContent = 'Selecione um cliente para ver os detalhes.';
   } catch (error) {
     console.error('Erro ao carregar clientes:', error);
     detalhesEl.textContent = 'Erro ao carregar clientes.';
@@ -57,7 +61,7 @@ const renderizarLista = () => {
       <td class="px-5 py-4 text-[#c5bdb1]">${c.telefone || ''}</td>
       <td class="px-5 py-4 text-[#c5bdb1]">${c.email || ''}</td>
       <td class="px-5 py-4 text-right">
-        <button data-id="${c.id}" class="ver-detalhes inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
+        <button type="button" data-id="${c.id}" aria-label="Ver detalhes de ${c.nomeEmpresarial || c.nome || 'cliente'}" class="ver-detalhes inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
       </td>
     `;
     listaEl.appendChild(tr);

@@ -6,6 +6,9 @@
   <title>Monitus – Segurança e Tecnologia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles/accessibility.css" />
+  <script src="../../scripts/accessibility.js" defer></script>
+  <script src="../../scripts/navigation.js" defer></script>
 </head>
 
 <body class="bg-[#1a1c1a] text-[#f0f0f0] font-sans">
@@ -13,16 +16,13 @@
   <div id="monitus-nav-slot"></div>
 
   
-  <section
+  <main id="main-content"
     class="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6 py-24"
     style="background: radial-gradient(ellipse 72% 48% at 50% 0%, rgba(62,180,73,0.13) 0%, transparent 65%), #1a1c1a;">
 
     
 
-
-    </div>
-  
-  </section>
+  </main>
 
   <script>
     fetch('/components/monitus-nav.html')

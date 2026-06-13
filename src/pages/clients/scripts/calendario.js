@@ -37,6 +37,8 @@ const hojeButton = document.getElementById("hoje-button");
 const prevMonthButton = document.getElementById("prev-month");
 const nextMonthButton = document.getElementById("next-month");
 const clientesList = document.getElementById("clientes-list");
+const submitVisitaButton = formVisita.querySelector('button[type="submit"]');
+let previouslyFocusedElement = null;
 
 const state = {
   year: new Date().getFullYear(),
@@ -163,7 +165,7 @@ const renderizarCalendario = () => {
     cell.innerHTML = `
       <div class="flex items-start justify-between gap-2">
         <span class="text-sm font-semibold text-white">${day}</span>
-        <button type="button" data-day="${day}" class="agendar-dia inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#3eb449]/20 bg-[#3eb449]/10 text-sm font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">+</button>
+        <button type="button" data-day="${day}" aria-label="Agendar visita em ${day} de ${formatarMesAno(state.year, state.month)}" class="agendar-dia inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#3eb449]/20 bg-[#3eb449]/10 text-sm font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">+</button>
       </div>
       <div class="mt-4 space-y-2">
         ${dayVisits.length > 0 ? `<span class="inline-flex rounded-full bg-[#3eb449]/15 px-2 py-1 text-[11px] font-semibold uppercase text-[#7cf887]">${dayVisits.length} visita${dayVisits.length > 1 ? "s" : ""}</span>` : ""}
@@ -221,7 +223,7 @@ const renderizarVisitasDoDia = (date) => {
       </div>
       <div class="mt-4 flex items-center justify-between gap-3 text-xs text-[#c5bdb1]">
         <span>Agendada para ${descricaoData}</span>
-        <button type="button" data-id="${visita.id}" class="remover-visita rounded-3xl border border-[#ef4444]/20 bg-[#ef4444]/10 px-4 py-2 font-semibold text-[#fca5a5] transition hover:bg-[#ef4444]/20">Excluir</button>
+        <button type="button" data-id="${visita.id}" aria-label="Excluir visita de ${visita.clienteNome} em ${descricaoData}" class="remover-visita rounded-3xl border border-[#ef4444]/20 bg-[#ef4444]/10 px-4 py-2 font-semibold text-[#fca5a5] transition hover:bg-[#ef4444]/20">Excluir</button>
       </div>
     `;
 
@@ -230,7 +232,10 @@ const renderizarVisitasDoDia = (date) => {
 };
 
 const abrirModal = (date) => {
+  previouslyFocusedElement = document.activeElement;
   modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  modal.setAttribute("aria-hidden", "false");
   modalDataLabel.textContent = `Data selecionada: ${formatarData(date)}`;
   visitaDataInput.value = date.toISOString();
   visitaClienteInput.value = "";
@@ -238,10 +243,14 @@ const abrirModal = (date) => {
   visitaMateriaisInput.value = "";
   visitaTecnicosInput.value = "";
   modalStatus.textContent = "";
+  visitaClienteInput.focus();
 };
 
 const fecharModal = () => {
   modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  modal.setAttribute("aria-hidden", "true");
+  if (previouslyFocusedElement) previouslyFocusedElement.focus();
 };
 
 const salvarVisita = async (evento) => {
@@ -254,14 +263,22 @@ const salvarVisita = async (evento) => {
 
   if (!clienteNome || !descricao) {
     modalStatus.textContent = "Informe o cliente e a descrição da visita.";
+    modalStatus.setAttribute("role", "alert");
+    const invalidField = !clienteNome ? visitaClienteInput : visitaDescricaoInput;
+    invalidField.setAttribute("aria-invalid", "true");
+    invalidField.focus();
     return;
   }
+  visitaClienteInput.removeAttribute("aria-invalid");
+  visitaDescricaoInput.removeAttribute("aria-invalid");
 
   const clienteEncontrado = state.clientes.find((cliente) => cliente.nome === clienteNome);
   const clienteId = clienteEncontrado ? clienteEncontrado.id : "";
 
   try {
     modalStatus.textContent = "Salvando visita...";
+    formVisita.setAttribute("aria-busy", "true");
+    submitVisitaButton.disabled = true;
     await addDoc(visitasRef, {
       clienteNome,
       clienteId,
@@ -282,6 +299,9 @@ const salvarVisita = async (evento) => {
   } catch (error) {
     console.error("Erro ao salvar visita:", error);
     modalStatus.textContent = "Não foi possível salvar a visita.";
+  } finally {
+    formVisita.setAttribute("aria-busy", "false");
+    submitVisitaButton.disabled = false;
   }
 };
 
@@ -371,6 +391,27 @@ fecharModalButton.addEventListener("click", fecharModal);
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
     fecharModal();
+  }
+});
+modal.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    fecharModal();
+    return;
+  }
+
+  if (event.key === "Tab") {
+    const focusable = [...modal.querySelectorAll('button, input, textarea, select, [tabindex]:not([tabindex="-1"])')]
+      .filter((element) => !element.disabled && !element.hidden);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 });
 formVisita.addEventListener("submit", salvarVisita);

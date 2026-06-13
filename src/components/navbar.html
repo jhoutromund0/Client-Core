@@ -1,12 +1,13 @@
-<div class="hidden lg:flex items-center justify-center gap-6 w-full">
+<nav class="hidden lg:flex items-center justify-center gap-6 w-full" aria-label="Navegação principal">
   <div class="relative group">
-    <button class="flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition duration-300 hover:bg-white/5 hover:text-[#c5bdb1]">
+    <button type="button" class="flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition duration-300 hover:bg-white/5 hover:text-[#c5bdb1]"
+      aria-expanded="false" aria-controls="solutions-menu" data-menu-button>
       Soluções
       <svg class="h-4 w-4 transition duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
     </button>
-    <div class="invisible absolute left-0 top-16 w-[340px] translate-y-4 opacity-0 rounded-[2rem] border border-[#333847] bg-[#0f1419]/95 p-4 backdrop-blur-3xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+    <div id="solutions-menu" class="hidden absolute left-0 top-16 w-[340px] rounded-[2rem] border border-[#333847] bg-[#0f1419]/95 p-4 backdrop-blur-3xl group-hover:block group-focus-within:block">
       <div class="space-y-2">
         <a href="#" class="group/item flex items-start gap-4 rounded-2xl p-4 transition hover:bg-white/5">
           <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#c5bdb1]/10 bg-[#c5bdb1]/5 text-[#c5bdb1] text-lg">✨</div>
@@ -35,4 +36,4 @@
   <a href="recursos.html" class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#c5bdb1]">Recursos</a>
   <a href="/pages/sobre.html" class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#c5bdb1]">Sobre</a>
   <a href="planos.html" class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#c5bdb1]">Planos</a>
-</div>
+</nav>

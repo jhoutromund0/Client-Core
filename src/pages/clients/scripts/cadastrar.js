@@ -32,6 +32,8 @@ const formatarCNPJ = (value) => {
 
 const setStatus = (message, type = 'info') => {
   cnpjStatus.textContent = message;
+  cnpjStatus.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
+  cnpjStatus.setAttribute('aria-live', type === 'error' || type === 'warning' ? 'assertive' : 'polite');
   cnpjStatus.className = 'text-xs min-h-[1.25rem] transition-colors';
 
   if (type === 'error') {
@@ -148,17 +150,22 @@ form.addEventListener('submit', async (event) => {
 
   if (limparCNPJ(cliente.cnpj).length !== 14) {
     setStatus('Informe um CNPJ valido antes de cadastrar.', 'warning');
+    cnpjInput.setAttribute('aria-invalid', 'true');
     cnpjInput.focus();
     return;
   }
+  cnpjInput.removeAttribute('aria-invalid');
 
   if (!cliente.nomeEmpresarial) {
     setStatus('Informe o nome empresarial antes de cadastrar.', 'warning');
+    nomeEmpresarialInput.setAttribute('aria-invalid', 'true');
     nomeEmpresarialInput.focus();
     return;
   }
+  nomeEmpresarialInput.removeAttribute('aria-invalid');
 
   submitButton.disabled = true;
+  form.setAttribute('aria-busy', 'true');
   submitButton.textContent = 'Cadastrando...';
   setStatus('Salvando cliente...');
 
@@ -173,6 +180,7 @@ form.addEventListener('submit', async (event) => {
     setStatus(error.message || 'Nao foi possivel cadastrar o cliente.', 'error');
   } finally {
     submitButton.disabled = false;
+    form.setAttribute('aria-busy', 'false');
     submitButton.textContent = 'Cadastrar Cliente';
   }
 });
