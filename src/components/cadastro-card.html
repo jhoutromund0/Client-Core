@@ -1,0 +1,34 @@
+<div class="w-full max-w-md rounded-[2rem] border border-white/10 bg-[#0f1419]/95 p-10 shadow-[0_25px_100px_rgba(0,0,0,0.25)] backdrop-blur-2xl">
+    <div class="mb-8 text-center">
+        <h2 class="text-3xl font-semibold text-white">Criar sua Conta</h2>
+        <p class="mt-2 text-sm text-[#9ca3af]">Preencha os dados abaixo para começar.</p>
+    </div>
+
+    <form id="cadastro-form" class="space-y-6">
+        <div class="input-group">
+            <label for="cadastro-email" class="mb-2 block text-sm font-medium text-[#d1d5db]">E-mail</label>
+            <input type="email" id="cadastro-email" required placeholder="seu@email.com"
+                class="w-full rounded-2xl border border-[#333847] bg-[#121827] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c5bdb1] focus:ring-2 focus:ring-[#c5bdb1]/20">
+        </div>
+        
+        <div class="input-group">
+            <label for="cadastro-password" class="mb-2 block text-sm font-medium text-[#d1d5db]">Palavra-passe (Senha)</label>
+            <input type="password" id="cadastro-password" required placeholder="No mínimo 6 caracteres"
+                class="w-full rounded-2xl border border-[#333847] bg-[#121827] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c5bdb1] focus:ring-2 focus:ring-[#c5bdb1]/20">
+        </div>
+
+        <div class="input-group">
+            <label for="cadastro-password-confirm" class="mb-2 block text-sm font-medium text-[#d1d5db]">Confirmar Palavra-passe</label>
+            <input type="password" id="cadastro-password-confirm" required placeholder="Repita a senha"
+                class="w-full rounded-2xl border border-[#333847] bg-[#121827] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c5bdb1] focus:ring-2 focus:ring-[#c5bdb1]/20">
+        </div>
+
+        <button type="submit" class="w-full rounded-2xl bg-[#c5bdb1] px-4 py-3 text-sm font-semibold text-[#1a1d26] transition hover:bg-[#d4c9bd] gold-glow btn-cadastro">
+            Cadastrar
+        </button>
+    </form>
+    
+    <p class="mt-6 text-center text-sm text-[#9ca3af]">
+        Já tem uma conta? <a href="/pages/login.html" class="font-semibold text-[#c5bdb1] hover:text-white">Faça login</a>
+    </p>
+</div>

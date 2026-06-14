@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Criar Conta - Monitus</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1419; /* Garante o fundo escuro padrão */
+        }
+
+        :root {
+            --color-gold: #c5bdb1;
+            --color-dark: #1a1d26;
+            --color-darker: #0f1419;
+            --color-border: #333847;
+            --color-gray: #9ca3af;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 40px rgba(197, 189, 177, 0.12);
+        }
+
+        .glass-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-[#0f1419] min-h-screen flex flex-col justify-between">
+
+    <div id="page-header"></div>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div id="cadastro-card-slot" class="w-full max-w-md"></div>
+    </main>
+
+    <div id="footer-slot"></div>
+
+    <script type="module" src="/scripts/app.js"></script>
+</body>
+</html>

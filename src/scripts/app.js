@@ -1,5 +1,5 @@
 import { auth } from '../firebase/firebase.js';
-import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js';
 
 const carregarComponente = async (slotId, componentPath) => {
   const slot = document.getElementById(slotId);
@@ -62,12 +62,63 @@ const carregarLogin = async () => {
   configurarAutenticacao();
 };
 
+const configurarCadastro = () => {
+  const cadastroForm = document.getElementById('cadastro-form');
+
+  if (!cadastroForm) return;
+
+  cadastroForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('cadastro-email').value;
+    const password = document.getElementById('cadastro-password').value;
+    const passwordConfirm = document.getElementById('cadastro-password-confirm').value;
+
+    // Validação básica: as senhas precisam ser iguais
+    if (password !== passwordConfirm) {
+      alert("As palavras-passe não coincidem! Verifique e tente novamente.");
+      return;
+    }
+
+    // Cria o usuário no Firebase
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("Conta criada com sucesso! 🎉 Bem-vindo à Monitus.");
+        window.location.href = "/pages/clients/monitus.html"; // Redireciona direto para o sistema
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          alert("Este e-mail já está em uso por outra conta.");
+        } else if (error.code === 'auth/weak-password') {
+          alert("A palavra-passe é muito fraca. Digite pelo menos 6 caracteres.");
+        } else {
+          alert("Erro ao criar conta: " + error.message);
+        }
+      });
+  });
+};
+
+const carregarCadastro = async () => {
+  await carregarComponente('page-header', '/components/header.html');
+  await carregarComponente('cadastro-card-slot', '/components/cadastro-card.html');
+  await carregarComponente('footer-slot', '/components/footer.html');
+
+  // Liga o motor do cadastro assim que o card estiver na tela
+  configurarCadastro();
+};
+
 const inicializarPagina = async () => {
   try {
     const possuiLogin = Boolean(document.getElementById('login-card-slot'));
+    const possuiCadastro = Boolean(document.getElementById('cadastro-card-slot'));
 
     if (possuiLogin) {
       await carregarLogin();
+      return;
+    }
+
+    if (possuiCadastro) {
+      await carregarCadastro();
       return;
     }
 
