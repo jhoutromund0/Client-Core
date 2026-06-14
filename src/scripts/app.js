@@ -15,19 +15,19 @@ const carregarComponente = async (slotId, componentPath) => {
 };
 
 const carregarComponentesBase = async () => {
-  await carregarComponente('page-header', '/src/components/header.html');
-  await carregarComponente('navbar-slot', '/src/components/navbar.html');
+  await carregarComponente('page-header', './components/header.html');
+  await carregarComponente('navbar-slot', './components/navbar.html');
 };
 
 const carregarHome = async () => {
   await carregarComponentesBase();
-  await carregarComponente('hero-slot', '/src/components/hero.html');
-  await carregarComponente('footer-slot', '/src/components/footer.html');
+  await carregarComponente('hero-slot', './components/hero.html');
+  await carregarComponente('footer-slot', './components/footer.html');
 };
 
 const carregarLogin = async () => {
-  await carregarComponente('page-header', '/src/components/header.html');
-  await carregarComponente('login-card-slot', '/src/components/login-card.html');
+  await carregarComponente('page-header', './components/header.html');
+  await carregarComponente('login-card-slot', './components/login-card.html');
 };
 
 const inicializarPagina = async () => {

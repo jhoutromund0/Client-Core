@@ -13,9 +13,9 @@
 <body class="min-h-screen bg-[#1a1c1a] text-[#f0f0f0] font-sans">
   <div id="monitus-nav-slot"></div>
 
-  <main class="min-h-[calc(100vh-64px)] px-6 py-10">
-    <section class="mx-auto flex w-full max-w-6xl flex-col gap-8">
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+  <main class="min-h-[calc(100vh-64px)] px-6 py-6">
+    <section class="mx-auto flex w-full max-w-6xl flex-col gap-5">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7cf887]">Agenda</p>
           <h1 class="mt-3 text-4xl font-extrabold text-white sm:text-5xl">Calendário de Visitas</h1>
@@ -26,10 +26,10 @@
         </div>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-[320px_1fr]">
-        <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
+      <div class="grid gap-5 lg:grid-cols-[320px_1fr]">
+        <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
           <div class="space-y-4">
-            <div class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#111314]/90 p-5">
+            <div class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#111314]/90 p-4">
               <p class="text-sm text-[#c5bdb1]/70">Visitas agendadas</p>
               <p id="total-visitas" class="mt-3 text-3xl font-extrabold text-white">0</p>
             </div>
@@ -48,8 +48,8 @@
           </div>
         </section>
 
-        <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
-          <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
+          <div class="mb-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 class="text-2xl font-bold text-white">Calendário</h2>
               <p id="calendario-status" class="mt-2 text-sm text-[#c5bdb1]/70">Clique no + para agendar uma visita em qualquer dia.</p>
@@ -72,8 +72,8 @@
         </section>
       </div>
 
-      <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-6 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
-        <div class="mb-6 flex items-center justify-between">
+      <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
+        <div class="mb-6 flex items-center justify-between gap-5">
           <h2 class="text-2xl font-bold text-white">Visitas do dia</h2>
           <p id="data-selecionada" class="text-sm text-[#c5bdb1]/70"></p>
         </div>
@@ -83,8 +83,8 @@
   </main>
 
   <div id="modal-agendar" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
-    <div class="w-full max-w-2xl rounded-[2rem] border border-[#3eb449]/25 bg-[#0f1419] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-      <div class="mb-6 flex items-center justify-between gap-4">
+    <div class="w-full max-w-2xl rounded-[2rem] border border-[#3eb449]/25 bg-[#0f1419] p-4 shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+      <div class="mb-6 flex items-center justify-between gap-5">
         <div>
           <h3 class="text-2xl font-bold text-white">Agendar visita</h3>
           <p id="modal-data" class="mt-2 text-sm text-[#c5bdb1]/70"></p>
@@ -95,19 +95,27 @@
         <input id="visita-data" type="hidden" />
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">Cliente</span>
-          <input id="visita-cliente" list="clientes-list" type="text" placeholder="Digite o cliente" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" required />
+          <input id="visita-cliente" list="clientes-list" type="text" placeholder="Digite o cliente" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" required />
         </label>
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">O que será realizado</span>
-          <textarea id="visita-descricao" rows="4" placeholder="Descrição da visita" class="w-full resize-none rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" required></textarea>
+          <select id="visita-tipo" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" required>
+            <option value="">Selecione o serviço</option>
+            <option value="Orçamento">Orçamento</option>
+            <option value="Instalação">Instalação</option>
+            <option value="Manutenção">Manutenção</option>
+            <option value="Suporte">Suporte</option>
+            <option value="Aquisição de equipamento">Aquisição de equipamento</option>
+          </select>
         </label>
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">Materiais necessários</span>
-          <textarea id="visita-materiais" rows="3" placeholder="Materiais necessários" class="w-full resize-none rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20"></textarea>
+          <select id="visita-materiais" multiple class="h-40 w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20"></select>
+          <p class="text-xs text-[#c5bdb1]/70">Segure Ctrl/Cmd ou Shift para selecionar mais de um material.</p>
         </label>
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">Técnico(s)</span>
-          <input id="visita-tecnicos" type="text" placeholder="Nome do(s) técnico(s)" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-4 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
+          <input id="visita-tecnicos" type="text" placeholder="Nome do(s) técnico(s)" class="w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20" />
         </label>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p id="modal-status" class="text-sm text-[#c5bdb1]/80"></p>

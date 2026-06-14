@@ -8,7 +8,7 @@ import {
   query,
   orderBy,
   getFirestore
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js"
 
 import { db } from "../../../firebase/firebase.js";
 
@@ -106,7 +106,6 @@ const renderizarLista = () => {
     const total = Number(material.medida || 0) * Number(material.valor || 0);
 
     tr.innerHTML = `
-      <td class="px-5 py-4 font-medium text-white">${material.id.slice(0, 8)}</td>
       <td class="px-5 py-4 text-[#c5bdb1]">${material.nome}</td>
       <td class="px-5 py-4 text-[#c5bdb1]">${material.tipoMedida === "comprimento" ? "Comprimento" : "Quantidade"}</td>
       <td class="px-5 py-4 text-[#c5bdb1]">${Number(material.medida).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${material.tipoMedida === "comprimento" ? material.unidade : "un"}</td>

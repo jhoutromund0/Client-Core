@@ -1,7 +1,6 @@
-import { buscarCNPJ } from './services/cnpj.js';
+import { buscarCNPJ } from '../scripts/services/cnpj.js';
 import { salvarCliente } from './clientes.js';
 
-import { db } from "../../../firebase/firebase.js";
 
 const form = document.querySelector('form');
 const cnpjInput = document.getElementById('cnpj');
@@ -16,6 +15,8 @@ const cnpjStatus = document.getElementById('cnpj-status');
 const submitButton = form.querySelector('button[type="submit"]');
 
 let debounceTimer = null;
+
+import { db } from "../../../firebase/firebase.js";
 
 const limparCNPJ = (value) => value.replace(/\D/g, '');
 
@@ -46,7 +47,7 @@ const setStatus = (message, type = 'info') => {
 };
 
 const preencherCampos = (dados) => {
-  nomeEmpresarialInput.value = dados.name || dados.fantasia || '';
+  nomeEmpresarialInput.value = dados.nome || dados.fantasia || '';
   telefoneInput.value = dados.telefone || '';
   emailInput.value = dados.email || '';
 
@@ -176,3 +177,7 @@ form.addEventListener('submit', async (event) => {
     submitButton.textContent = 'Cadastrar Cliente';
   }
 });
+
+
+
+

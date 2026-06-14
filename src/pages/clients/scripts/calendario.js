@@ -7,12 +7,13 @@ import {
   orderBy,
   query,
   Timestamp
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 import { db } from "../../../firebase/firebase.js";
 
 const visitasRef = collection(db, "visitas");
 const clientesRef = collection(db, "clientes");
+const materiaisRef = collection(db, "materiais");
 
 const buscaClienteInput = document.getElementById("buscar-cliente");
 const limparFiltroButton = document.getElementById("limpar-filtro");
@@ -29,7 +30,7 @@ const fecharModalButton = document.getElementById("fechar-modal");
 const formVisita = document.getElementById("form-visita");
 const visitaDataInput = document.getElementById("visita-data");
 const visitaClienteInput = document.getElementById("visita-cliente");
-const visitaDescricaoInput = document.getElementById("visita-descricao");
+const visitaTipoInput = document.getElementById("visita-tipo");
 const visitaMateriaisInput = document.getElementById("visita-materiais");
 const visitaTecnicosInput = document.getElementById("visita-tecnicos");
 const modalStatus = document.getElementById("modal-status");
@@ -37,6 +38,8 @@ const hojeButton = document.getElementById("hoje-button");
 const prevMonthButton = document.getElementById("prev-month");
 const nextMonthButton = document.getElementById("next-month");
 const clientesList = document.getElementById("clientes-list");
+
+let materiaisDisponiveis = [];
 
 const state = {
   year: new Date().getFullYear(),

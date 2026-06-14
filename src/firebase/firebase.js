@@ -1,5 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js';
+import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js';
 
 // Suas credenciais exatas (tiradas da sua imagem)
 const firebaseConfig = {
@@ -16,4 +16,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Inicializa o Banco de Dados Firestore e o exporta para podermos usar em outras telas
-export const db = getFirestore(app);
+export const db = getFirestore(app, "firebase");
