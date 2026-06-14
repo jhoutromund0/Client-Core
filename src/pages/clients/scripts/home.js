@@ -102,7 +102,7 @@ carregarResumoSistema();
 async function carregarNavbar() {
   try {
     const response = await fetch(
-      '/components/monitus-nav.html'
+      '../../components/monitus-nav.html'
     );
 
     if (!response.ok) {
