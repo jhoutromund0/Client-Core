@@ -47,36 +47,16 @@ const formatarCNPJ = (value) =>
 // ─── Firestore ───────────────────────────────────────────────────────────────
 
 const carregarClientes = async () => {
-    try {
-        const q        = query(collection(db, "clientes"), orderBy("nomeEmpresarial", "asc"));
-        const snapshot = await getDocs(q);
-        clientes       = snapshot.docs.map((s) => ({ id: s.id, ...s.data() }));
-        renderizarLista();
-    } catch (error) {
-        console.error("Erro ao carregar clientes:", error);
-    }
+  try {
+    const q = query(clientesRef, orderBy('nomeEmpresarial', 'asc'));
+    const snapshot = await getDocs(q);
+    clientes = snapshot.docs.map(s => ({ id: s.id, ...s.data() }));
+    renderizarLista();
+  } catch (error) {
+    console.error('Erro ao carregar clientes:', error);
+    detalhesEl.textContent = 'Erro ao carregar clientes.';
+  }
 };
-
-const atualizarCliente = async (id, dados) => {
-    const ref = doc(db, "clientes", id);
-    await updateDoc(ref, {
-        ...dados,
-        cnpj:        limparCNPJ(dados.cnpj),
-        atualizadoEm: serverTimestamp(),
-    });
-
-    // Atualiza o estado local sem precisar recarregar tudo
-    clientes = clientes.map((c) =>
-        c.id === id ? { ...c, ...dados, cnpj: limparCNPJ(dados.cnpj) } : c
-    );
-};
-
-const excluirCliente = async (id) => {
-    await deleteDoc(doc(db, "clientes", id));
-    clientes = clientes.filter((c) => c.id !== id);
-};
-
-// ─── Filtro ──────────────────────────────────────────────────────────────────
 
 const clientesFiltrados = () => {
     const f = filtro.trim().toLowerCase();
@@ -101,23 +81,21 @@ const renderizarLista = () => {
     }
     listaVazia.classList.add("hidden");
 
-    items.forEach((c) => {
-        const tr       = document.createElement("tr");
-        tr.className   = "border-t border-[#3eb449]/10";
-        tr.dataset.id  = c.id;
-        tr.innerHTML   = `
-            <td class="px-5 py-4 text-[#c5bdb1]">${c.nomeEmpresarial || ""}</td>
-            <td class="px-5 py-4 text-[#c5bdb1]">${formatarCNPJ(c.cnpj || "")}</td>
-            <td class="px-5 py-4 text-[#c5bdb1]">${c.telefone || ""}</td>
-            <td class="px-5 py-4 text-[#c5bdb1]">${c.email || ""}</td>
-            <td class="px-5 py-4 text-right flex gap-2 justify-end">
-                <button data-id="${c.id}" class="btn-ver inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
-                <button data-id="${c.id}" class="btn-editar inline-flex items-center justify-center rounded-full border border-blue-400/25 bg-blue-400/10 px-4 py-2 text-xs font-semibold text-blue-300 transition hover:bg-blue-400/20">Editar</button>
-                <button data-id="${c.id}" class="btn-excluir inline-flex items-center justify-center rounded-full border border-rose-400/25 bg-rose-400/10 px-4 py-2 text-xs font-semibold text-rose-300 transition hover:bg-rose-400/20">Excluir</button>
-            </td>
-        `;
-        listaEl.appendChild(tr);
-    });
+  items.forEach(c => {
+    const tr = document.createElement('tr');
+    tr.className = 'border-t border-[#3eb449]/10';
+    tr.innerHTML = `
+      <td class="px-5 py-4 font-medium text-white">${c.id.slice(0,8)}</td>
+      <td class="px-5 py-4 text-[#c5bdb1]">${(c.nomeEmpresarial || c.nome || '')}</td>
+      <td class="px-5 py-4 text-[#c5bdb1]">${formatCNPJ(c.cnpj || '')}</td>
+      <td class="px-5 py-4 text-[#c5bdb1]">${c.telefone || ''}</td>
+      <td class="px-5 py-4 text-[#c5bdb1]">${c.email || ''}</td>
+      <td class="px-5 py-4 text-right">
+        <button data-id="${c.id}" class="ver-detalhes inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
+      </td>
+    `;
+    listaEl.appendChild(tr);
+  });
 };
 
 // ─── Detalhes ────────────────────────────────────────────────────────────────

@@ -10,9 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet"
-    />
-
-    
+    />    
 </head>
 
 <body class="bg-[#1a1d26] text-white antialiased overflow-x-hidden">
@@ -32,6 +30,54 @@
     </div>
 
     <!-- HERO -->
+
+    <link rel="stylesheet" href="../styles/accessibility.css" />
+    <script src="../scripts/accessibility.js" defer></script>
+    <script src="../scripts/navigation.js" defer></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --color-gold: #c5bdb1;
+            --color-dark: #1a1d26;
+            --color-darker: #0f1419;
+            --color-border: #333847;
+            --color-gray: #9ca3af;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 40px rgba(197, 189, 177, 0.12);
+        }
+
+        .glass-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-[#1a1d26] text-white antialiased overflow-x-hidden">
+
+    <!-- COMPONENTES -->
+    <div id="page-header"></div>
+    <div id="navbar-slot"></div>
+
+    <script src="../scripts/app.js"></script>
+
+    <!-- BACKGROUND -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-[-150px] left-[-100px] w-[400px] h-[400px] bg-[#c5bdb1]/10 blur-[140px] rounded-full"></div>
+
+        <div class="absolute bottom-[-150px] right-[-100px] w-[350px] h-[350px] bg-[#c5bdb1]/5 blur-[120px] rounded-full"></div>
+    </div>
+
+    <!-- HERO -->
+    <main id="main-content">
+>>>>>>> 71a4fedee91ec9464ac3fef01b4d6034ca841030
     <section class="relative pt-44 pb-28 px-6">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
 
@@ -393,6 +439,7 @@
     </section>
 
     <!-- FOOTER -->
+    </main>
     <footer class="border-t border-[#333847]">
 
         <div class="max-w-7xl mx-auto px-8 py-16">

@@ -6,14 +6,18 @@
   <title>Monitus - Materiais</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles/accessibility.css" />
+  <script src="../../scripts/accessibility.js" defer></script>
+  <script src="../../scripts/navigation.js" defer></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
 <body class="min-h-screen bg-[#1a1c1a] text-[#f0f0f0] font-sans">
   <div id="monitus-nav-slot"></div>
-  <main class="min-h-[calc(100vh-64px)] px-4 py-6">
-    <section class="mx-auto flex w-full max-w-6xl flex-col gap-5">
+
+  <main class="min-h-[calc(100vh-64px)] px-6 py-10">
+    <section class="mx-auto flex w-full max-w-6xl flex-col gap-8">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7cf887]">Estoque</p>
@@ -51,7 +55,7 @@
         <form id="material-form" class="self-start rounded-[2rem] border border-[#3eb449]/15 bg-[#141716]/85 p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)]" autocomplete="off">
           <div class="mb-6">
             <h2 id="form-title" class="text-2xl font-bold text-white">Adicionar material</h2>
-            <p id="form-status" class="mt-2 min-h-[1.25rem] text-xs text-[#c5bdb1]/70"></p>
+            <p id="form-status" role="status" aria-live="polite" class="mt-2 min-h-[1.25rem] text-xs text-[#c5bdb1]/70"></p>
           </div>
 
           <input id="material-id" type="hidden" />
@@ -105,6 +109,7 @@
           <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 class="text-2xl font-bold text-white">Lista de materiais</h2>
+              <p id="lista-status" class="mt-2 text-sm text-[#c5bdb1]/70">Carregando materiais...</p>
             </div>
 
             <label class="w-full md:max-w-xs">
@@ -116,6 +121,7 @@
           <div class="overflow-hidden rounded-[1.5rem] border border-[#3eb449]/10">
             <div class="overflow-x-auto">
               <table class="w-full min-w-[820px] text-left text-sm">
+                <caption class="sr-only">Materiais cadastrados, valores e ações disponíveis</caption>
                 <thead class="bg-[#111314] text-xs uppercase tracking-[0.16em] text-[#c5bdb1]/70">
                   <tr>
                     <th class="px-5 py-3 font-semibold">Nome</th>

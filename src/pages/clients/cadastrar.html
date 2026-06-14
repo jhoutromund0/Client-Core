@@ -6,6 +6,9 @@
   <title>Monitus – Cadastro de Cliente</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles/accessibility.css" />
+  <script src="../../scripts/accessibility.js" defer></script>
+  <script src="../../scripts/navigation.js" defer></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
@@ -13,14 +16,14 @@
 <body class="bg-[#1a1c1a] text-[#f0f0f0] font-sans">
   <div id="monitus-nav-slot"></div>
 
-  <main class="min-h-[calc(100vh-64px)] flex items-center justify-center px-6 py-16">
+  <main id="main-content" class="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 sm:px-6 py-16">
     <section class="w-full max-w-4xl rounded-[2rem] border border-[#3eb449]/15 bg-[#141716]/85 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl">
       <div class="mb-10 text-center">
         <h1 class="mt-4 text-4xl font-extrabold text-[#7cf887] sm:text-5xl">Cadastro de Cliente</h1>
         <p class="mt-3 max-w-2xl mx-auto text-[#c5bdb1]/80">Preencha os dados abaixo para cadastrar um cliente com segurança e clareza.</p>
       </div>
 
-      <form class="grid gap-6" autocomplete="off">
+      <form id="client-form" class="grid gap-6" autocomplete="off" aria-describedby="required-fields-note">
         <div class="grid gap-6 sm:grid-cols-2">
           <label class="space-y-2 text-sm text-[#c5bdb1]/90">
             <span class="font-medium text-[#f8faf7]">CNPJ</span>
@@ -72,7 +75,7 @@
         </div>
 
         <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p class="text-sm text-[#c5bdb1]/70">* Campos obrigatórios para cadastro de cliente.</p>
+          <p id="required-fields-note" class="text-sm text-[#c5bdb1]/70">CNPJ e nome empresarial são campos obrigatórios.</p>
           <button type="submit" class="inline-flex items-center justify-center rounded-3xl bg-[#3eb449] px-6 py-4 text-sm font-semibold text-[#0f1419] transition hover:bg-[#62d06d]">Cadastrar Cliente</button>
         </div>
       </form>

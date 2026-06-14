@@ -59,6 +59,8 @@ const limparFormulario = () => {
 
 const atualizarStatus = (message, type = "info") => {
   status.textContent = message;
+  status.setAttribute("role", type === "error" || type === "warning" ? "alert" : "status");
+  status.setAttribute("aria-live", type === "error" || type === "warning" ? "assertive" : "polite");
   status.className = "mt-2 min-h-[1.25rem] text-xs ";
 
   if (type === "success") {
@@ -112,8 +114,8 @@ const renderizarLista = () => {
       <td class="px-5 py-4 text-[#c5bdb1]">${formatarMoeda(Number(material.valor || 0))}</td>
       <td class="px-5 py-4 text-[#c5bdb1]">${formatarMoeda(total)}</td>
       <td class="px-5 py-4 text-right"> 
-        <button data-id="${material.id}" class="editar-material inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Editar</button>
-        <button data-id="${material.id}" class="remover-material ml-2 inline-flex items-center justify-center rounded-full border border-[#ef4444]/25 bg-[#ef4444]/10 px-4 py-2 text-xs font-semibold text-[#fca5a5] transition hover:bg-[#ef4444]/20">Excluir</button>
+        <button type="button" data-id="${material.id}" aria-label="Editar ${material.nome}" class="editar-material inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Editar</button>
+        <button type="button" data-id="${material.id}" aria-label="Excluir ${material.nome}" class="remover-material ml-2 inline-flex items-center justify-center rounded-full border border-[#ef4444]/25 bg-[#ef4444]/10 px-4 py-2 text-xs font-semibold text-[#fca5a5] transition hover:bg-[#ef4444]/20">Excluir</button>
       </td>
     `;
 
@@ -226,20 +228,30 @@ form.addEventListener("submit", async (event) => {
 
   if (!nome) {
     atualizarStatus("Informe o nome do material.", "warning");
+    inputNome.setAttribute("aria-invalid", "true");
+    inputNome.focus();
     return;
   }
+  inputNome.removeAttribute("aria-invalid");
 
   if (medida <= 0) {
     atualizarStatus("Informe uma medida válida.", "warning");
+    inputMedida.setAttribute("aria-invalid", "true");
+    inputMedida.focus();
     return;
   }
+  inputMedida.removeAttribute("aria-invalid");
 
   if (valor < 0) {
     atualizarStatus("Informe um valor válido.", "warning");
+    inputValor.setAttribute("aria-invalid", "true");
+    inputValor.focus();
     return;
   }
+  inputValor.removeAttribute("aria-invalid");
 
   buttonSubmit.disabled = true;
+  form.setAttribute("aria-busy", "true");
   buttonSubmit.textContent = "Salvando...";
 
   const material = construirMaterial();
@@ -252,6 +264,7 @@ form.addEventListener("submit", async (event) => {
 
   limparFormulario();
   buttonSubmit.disabled = false;
+  form.setAttribute("aria-busy", "false");
   buttonSubmit.textContent = inputId.value ? "Atualizar Material" : "Salvar Material";
 });
 
