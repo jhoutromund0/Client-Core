@@ -82,15 +82,7 @@
     </section>
   </main>
   <script type="module" src="./scripts/cadastrar.js"></script>
-  <script>
-    fetch('/components/monitus-nav.html')
-      .then(resp => {
-        if (!resp.ok) throw new Error('Monitus nav não encontrado');
-        return resp.text();
-      })
-      .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
-      .catch(err => console.error('Erro ao carregar monitus-nav:', err));
-  </script>
+  <script type="module" src="./scripts/home.js"></script>
   
 </body>
 </html>

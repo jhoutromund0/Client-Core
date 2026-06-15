@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="../../styles/accessibility.css" />
   <script src="../../scripts/accessibility.js" defer></script>
   <script src="../../scripts/navigation.js" defer></script>
-  <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="min-h-screen bg-[#1a1c1a] text-[#f0f0f0] font-sans">
   <div id="monitus-nav-slot"></div>
+
 
   <main id="main-content" class="min-h-[calc(100vh-64px)] px-4 sm:px-6 py-10">
     <section class="mx-auto w-full max-w-6xl">
@@ -193,16 +193,7 @@
     </div>
   </div>
 
+  <script type="module" src="./scripts/home.js"></script>
   <script type="module" src="./scripts/consulta.js"></script>
-  <script>
-    // Botão cancelar do rodapé do modal de edição aponta para o mesmo handler
-    document.getElementById('fechar-modal-rodape')
-      ?.addEventListener('click', () => document.getElementById('modal-editar').classList.add('hidden'));
-
-    fetch('/components/monitus-nav.html')
-      .then(resp => { if (!resp.ok) throw new Error('Monitus nav não encontrado'); return resp.text(); })
-      .then(html => { document.getElementById('monitus-nav-slot').innerHTML = html; })
-      .catch(err => console.error('Erro ao carregar monitus-nav:', err));
-  </script>
 </body>
 </html>

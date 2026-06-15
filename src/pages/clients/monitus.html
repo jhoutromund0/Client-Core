@@ -6,45 +6,98 @@
   <title>Monitus – Home</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
 </head>
 
 <body class="bg-[#1a1c1a] text-[#f0f0f0]">
 
   <div id="monitus-nav-slot"></div>
 
-  
-  <section
-    class="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center text-center px-6 py-24"
-    style="background: radial-gradient(ellipse 72% 48% at 50% 0%, rgba(62,180,73,0.13) 0%, transparent 65%), #1a1c1a;">
-
-    <div class="max-w-7xl mx-auto w-full">
-    <h1 class="text-4xl font-extrabold mb-12 text-white">Indicadores do Sistema</h1>
+  <main class="px-6 py-10">
     
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-left">
-      <div class="rounded-[2rem] border border-[#3eb449]/20 bg-[#141716]/85 p-6">
-        <p class="text-sm font-medium text-[#c5bdb1]/80 mb-2">Total de Clientes</p>
-        <span id="total-clientes" class="text-4xl font-black text-[#7cf887]">...</span>
+    <section class="mx-auto max-w-7xl rounded-[2rem] border border-[#3eb449]/20 bg-[#141716]/85 p-10 shadow-[0_40px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+
+        <div class="max-w-2xl">
+          <span class="rounded-full border border-[#3eb449]/20 bg-[#3eb449]/10 px-4 py-2 text-sm text-[#7cf887]">
+            Sistema de Gestão Empresarial
+          </span>
+
+          <h1 class="mt-6 text-5xl font-extrabold leading-tight text-[#7cf887]">
+            Bem-vindo ao Monitus
+          </h1>
+
+          <p class="mt-4 text-lg text-[#c5bdb1]/80">
+            Gerencie clientes, acompanhe cadastros empresariais
+            e centralize todas as informações do sistema em um único lugar.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+
+            <a
+              href="./cadastro.html"
+              class="rounded-3xl bg-[#3eb449] px-6 py-4 font-semibold text-[#0f1419] transition hover:bg-[#62d06d]"
+            >
+              Cadastrar Cliente
+            </a>
+
+            <a
+              href="./calendario.html"
+              class="rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-6 py-4 font-semibold transition hover:border-[#3eb449]"
+            >
+              Calendario
+            </a>
+
+          </div>
+        </div>
+
+        <div class="w-full max-w-sm rounded-[2rem] border border-[#3eb449]/20 bg-[#111314] p-8">
+
+          <h2 class="text-xl font-bold text-[#7cf887]">
+            Resumo do Sistema
+          </h2>
+
+          <div class="mt-6 space-y-5">
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#c5bdb1]/80">Clientes</span>
+              <span id="total-clientes" class="font-bold text-white">
+                --
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#c5bdb1]/80">Matrizes</span>
+              <span id="total-matriz" class="font-bold text-white">
+                --
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#c5bdb1]/80">Filiais</span>
+              <span id="total-filial" class="font-bold text-white">
+                --
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[#c5bdb1]/80">
+                Cadastros este mês
+              </span>
+
+              <span id="cadastros-mes" class="font-bold text-[#7cf887]">
+                --
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
-      
-      <div class="rounded-[2rem] border border-[#3eb449]/20 bg-[#141716]/85 p-6">
-        <p class="text-sm font-medium text-[#c5bdb1]/80 mb-2">Empresas Matriz</p>
-        <span id="total-matriz" class="text-4xl font-black text-white">...</span>
-      </div>
-      
-      <div class="rounded-[2rem] border border-[#3eb449]/20 bg-[#141716]/85 p-6">
-        <p class="text-sm font-medium text-[#c5bdb1]/80 mb-2">Empresas Filial</p>
-        <span id="total-filial" class="text-4xl font-black text-white">...</span>
-      </div>
-      
-      <div class="rounded-[2rem] border border-[#3eb449]/20 bg-[#141716]/85 p-6">
-        <p class="text-sm font-medium text-[#c5bdb1]/80 mb-2">Cadastros do Mês</p>
-        <span id="cadastros-mes" class="text-4xl font-black text-[#7cf887]">...</span>
-      </div>
-    </div>
-  </div>
-  
-  </section>
+
+    </section>
 
     <section class="mx-auto mt-10 max-w-7xl">
 

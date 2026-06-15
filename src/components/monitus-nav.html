@@ -1,4 +1,6 @@
-<nav class="w-full sticky top-0 z-50 bg-[#222522] border-b border-[#3eb449]/20" aria-label="Navegação do Monitus">
+<nav class="w-full sticky top-0 z-50 bg-[#222522] border-b border-[#3eb449]/20"
+  aria-label="Navegação do Monitus">
+
   <div class="max-w-[1200px] mx-auto px-8 h-16 flex items-center justify-between">
 
     <!-- Logo -->
@@ -8,66 +10,174 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
       </div>
+
       <div class="leading-none">
         <p class="font-extrabold text-white text-[1.05rem] tracking-tight leading-none">
           <span class="text-[#3eb449]">Monitus</span>
         </p>
-        <p class="text-[10px] text-[#8a9189] tracking-widest uppercase mt-0.5">Segurança Inteligente</p>
+        <p class="text-[10px] text-[#8a9189] tracking-widest uppercase mt-0.5">
+          Segurança Inteligente
+        </p>
       </div>
     </div>
 
-    <!-- Nav links -->
-    <div class="hidden lg:flex items-center justify-center gap-6 w-full ">
-  <div class="relative group">
-    <button type="button" class="flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition duration-300 hover:bg-white/5 hover:text-[#3eb449]"
-      aria-expanded="false" aria-controls="clienthub-menu" data-menu-button>
-      ClientHub
-      <svg class="h-4 w-4 transition duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
-    <div id="clienthub-menu" class="hidden absolute left-1/2 -translate-x-1/2 top-16 w-[340px] rounded-[2rem] border border-[#333847] bg-[#0f1419]/95 p-4 backdrop-blur-3xl group-hover:block group-focus-within:block">
-      <div class="space-y-2">
-        <a href="cadastrar.html" class="group/item flex items-start gap-4 rounded-2xl p-4 transition hover:bg-white/5">
-          <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#3eb449]/10 bg-[#c5bdb1]/5 text-[#7cf887] text-lg">✚</div>
-          <div>
-            <h3 class="font-medium text-white group-hover/item:text-[#3eb449]">Cadastrar Clientes</h3>
+    <!-- Navbar -->
+    <div class="hidden lg:flex items-center justify-center gap-4 w-full">
+
+      <!-- HOME -->
+      <a href="monitus.html"
+        class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db]
+        transition hover:bg-white/5 hover:text-[#3eb449]">
+        Home
+      </a>
+
+      <!-- CLIENT HUB -->
+      <div class="relative group" id="clienthub-item">
+
+        <button type="button"
+          class="flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db]
+          transition duration-300 hover:bg-white/5 hover:text-[#3eb449]">
+
+          ClientHub
+
+          <svg class="h-4 w-4 transition duration-300 group-hover:rotate-180"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div
+          class="hidden absolute left-1/2 -translate-x-1/2 top-16
+          w-[340px] rounded-[2rem] border border-[#333847]
+          bg-[#0f1419]/95 p-4 backdrop-blur-3xl
+          group-hover:block group-focus-within:block">
+
+          <div class="space-y-2">
+
+            <a href="cadastrar.html"
+              class="group/item flex items-start gap-4 rounded-2xl p-4 transition hover:bg-white/5">
+
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl
+                border border-[#3eb449]/10 bg-[#c5bdb1]/5 text-[#7cf887] text-lg">
+                ✚
+              </div>
+
+              <div>
+                <h3 class="font-medium text-white group-hover/item:text-[#3eb449]">
+                  Cadastrar Clientes
+                </h3>
+              </div>
+            </a>
+
+            <a href="consulta.html"
+              class="group/item flex items-start gap-4 rounded-2xl p-4 transition hover:bg-white/5">
+
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl
+                border border-[#3eb449]/10 bg-[#c5bdb1]/5 text-[#7cf887] text-lg">
+                ✎
+              </div>
+
+              <div>
+                <h3 class="font-medium text-white group-hover/item:text-[#3eb449]">
+                  Consultar Clientes
+                </h3>
+              </div>
+            </a>
+
           </div>
-        </a>
-        <a href="consulta.html" class="group/item flex items-start gap-4 rounded-2xl p-4 transition hover:bg-white/5">
-          <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#3eb449]/10 bg-[#c5bdb1]/5 text-[#7cf887] text-lg">✎</div>
-          <div>
-            <h3 class="font-medium text-white group-hover/item:text-[#3eb449]">Consultar Clientes</h3>
-          </div>
-        </a>
+        </div>
+      </div>
+
+      <!-- CALENDARIO -->
+      <a href="calendario.html"
+        class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db]
+        transition hover:bg-white/5 hover:text-[#3eb449]"
+        id="calendar-item">
+        Calendário
+      </a>
+
+      <!-- MATERIAIS -->
+      <a href="materiais.html"
+        class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db]
+        transition hover:bg-white/5 hover:text-[#3eb449]"
+        id="materials-item">
+        Materiais
+      </a>
+
+    </div>
+
+    <!-- LADO DIREITO -->
+    <div class="flex items-center gap-4">
+
+      <!-- USER -->
+      <span id="username"
+        class="text-sm font-medium text-[#8a9189]">
+      </span>
+
+      <!-- ENGENHAGEM ADMIN -->
+      <div class="relative hidden" id="admin-settings">
+
+        <button id="settings-button"
+          class="text-[#8a9189] hover:text-[#3eb449] transition">
+
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11.983 13.938a1.955 1.955 0 100-3.91
+              1.955 1.955 0 000 3.91z"/>
+
+            <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19.4 15a1.65 1.65 0 00.33
+              1.82l.06.06a2 2 0 11-2.83
+              2.83l-.06-.06a1.65 1.65 0
+              00-1.82-.33 1.65 1.65 0
+              00-1 1.51V21a2 2 0
+              11-4 0v-.09a1.65 1.65 0
+              00-1-1.51 1.65 1.65 0
+              00-1.82.33l-.06.06a2
+              2 0 11-2.83-2.83l.06-.06a1.65
+              1.65 0 00.33-1.82 1.65
+              1.65 0 00-1.51-1H3a2
+              2 0 110-4h.09a1.65 1.65
+              0 001.51-1 1.65 1.65 0
+              00-.33-1.82l-.06-.06a2
+              2 0 112.83-2.83l.06.06a1.65
+              1.65 0 001.82.33h.09a1.65
+              1.65 0 001-1.51V3a2 2
+              0 114 0v.09a1.65 1.65
+              0 001 1.51 1.65 1.65
+              0 001.82-.33l.06-.06a2
+              2 0 112.83 2.83l-.06.06a1.65
+              1.65 0 00-.33 1.82v.09a1.65
+              1.65 0 001.51 1H21a2
+              2 0 110 4h-.09a1.65
+              1.65 0 00-1.51 1z"/>
+          </svg>
+        </button>
+
+        <!-- Dropdown -->
+        <div id="settings-menu"
+          class="hidden absolute right-0 mt-4 w-72 rounded-2xl
+          bg-[#0f1419] border border-[#3eb449]/20 p-4">
+
+          <h3 class="text-white font-semibold mb-3">
+            Usuários do Sistema
+          </h3>
+
+          <div id="users-list" class="space-y-2"></div>
+
+        </div>
       </div>
     </div>
   </div>
-  <a href="calendario.html" class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">Calendario</a>
-  <a href="materiais.html" class="rounded-2xl px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">Materiais</a>
-</div>
-
-    <!-- Right side User -->
-    <div class="hidden lg:flex items-center">
-      <a href="#" class="text-sm font-medium text-[#8a9189] hover:text-white transition-colors">User</a>
-    </div>
-
-    <!-- Mobile menu button -->
-    <button id="mobile-menu-button" type="button" class="lg:hidden flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]"
-      aria-label="Abrir menu do Monitus" aria-controls="mobile-menu" aria-expanded="false">
-      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-
-  </div>
-
-  <!-- Mobile menu (hidden by default) -->
-  <div id="mobile-menu" class="lg:hidden hidden absolute top-16 left-0 w-full bg-[#222522] border-t border-[#3eb449]/20">
-    <a href="monitus.html" class="block px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">Home</a>
-    <a href="#" class="block px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">ClientHub</a>
-    <a href="calendario.html" class="block px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">Calendario</a>
-    <a href="materiais.html" class="block px-5 py-3 text-sm font-medium text-[#d1d5db] transition hover:bg-white/5 hover:text-[#3eb449]">Materiais</a>
-  </div>
-
 </nav>

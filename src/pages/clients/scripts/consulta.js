@@ -17,24 +17,20 @@ const listaEl          = document.getElementById("clientes-lista");
 const listaVazia       = document.getElementById("lista-vazia");
 const detalhesEl       = document.getElementById("cliente-detalhes");
 
-// Modal de edição
 const modalEditar      = document.getElementById("modal-editar");
 const formEditar       = document.getElementById("form-editar");
 const btnFecharModal   = document.getElementById("fechar-modal");
 
-// Modal de confirmação de exclusão
 const modalExcluir     = document.getElementById("modal-excluir");
 const btnConfirmarExcl = document.getElementById("confirmar-exclusao");
 const btnCancelarExcl  = document.getElementById("cancelar-exclusao");
 
-// ─── Estado ─────────────────────────────────────────────────────────────────
 
 let clientes       = [];
 let filtro         = "";
 let clienteSendoEditado  = null;
 let clienteSendoExcluido = null;
 
-// ─── Utilitários ────────────────────────────────────────────────────────────
 
 const limparCNPJ = (value) => (value || "").replace(/\D/g, "");
 
@@ -44,19 +40,36 @@ const formatarCNPJ = (value) =>
         "$1.$2.$3/$4-$5"
     );
 
-// ─── Firestore ───────────────────────────────────────────────────────────────
 
 const carregarClientes = async () => {
-  try {
-    const q = query(clientesRef, orderBy('nomeEmpresarial', 'asc'));
-    const snapshot = await getDocs(q);
-    clientes = snapshot.docs.map(s => ({ id: s.id, ...s.data() }));
-    renderizarLista();
-  } catch (error) {
-    console.error('Erro ao carregar clientes:', error);
-    detalhesEl.textContent = 'Erro ao carregar clientes.';
-  }
+    try {
+        const q        = query(collection(db, "clientes"), orderBy("nomeEmpresarial", "asc"));
+        const snapshot = await getDocs(q);
+        clientes       = snapshot.docs.map((s) => ({ id: s.id, ...s.data() }));
+        renderizarLista();
+    } catch (error) {
+        console.error("Erro ao carregar clientes:", error);
+    }
 };
+
+const atualizarCliente = async (id, dados) => {
+    const ref = doc(db, "clientes", id);
+    await updateDoc(ref, {
+        ...dados,
+        cnpj:        limparCNPJ(dados.cnpj),
+        atualizadoEm: serverTimestamp(),
+    });
+
+    clientes = clientes.map((c) =>
+        c.id === id ? { ...c, ...dados, cnpj: limparCNPJ(dados.cnpj) } : c
+    );
+};
+
+const excluirCliente = async (id) => {
+    await deleteDoc(doc(db, "clientes", id));
+    clientes = clientes.filter((c) => c.id !== id);
+};
+
 
 const clientesFiltrados = () => {
     const f = filtro.trim().toLowerCase();
@@ -68,7 +81,6 @@ const clientesFiltrados = () => {
     );
 };
 
-// ─── Renderização da lista ───────────────────────────────────────────────────
 
 const renderizarLista = () => {
     const items = clientesFiltrados();
@@ -81,24 +93,25 @@ const renderizarLista = () => {
     }
     listaVazia.classList.add("hidden");
 
-  items.forEach(c => {
-    const tr = document.createElement('tr');
-    tr.className = 'border-t border-[#3eb449]/10';
-    tr.innerHTML = `
-      <td class="px-5 py-4 font-medium text-white">${c.id.slice(0,8)}</td>
-      <td class="px-5 py-4 text-[#c5bdb1]">${(c.nomeEmpresarial || c.nome || '')}</td>
-      <td class="px-5 py-4 text-[#c5bdb1]">${formatCNPJ(c.cnpj || '')}</td>
-      <td class="px-5 py-4 text-[#c5bdb1]">${c.telefone || ''}</td>
-      <td class="px-5 py-4 text-[#c5bdb1]">${c.email || ''}</td>
-      <td class="px-5 py-4 text-right">
-        <button data-id="${c.id}" class="ver-detalhes inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
-      </td>
-    `;
-    listaEl.appendChild(tr);
-  });
+    items.forEach((c) => {
+        const tr       = document.createElement("tr");
+        tr.className   = "border-t border-[#3eb449]/10";
+        tr.dataset.id  = c.id;
+        tr.innerHTML   = `
+            <td class="px-5 py-4 text-[#c5bdb1]">${c.nomeEmpresarial || ""}</td>
+            <td class="px-5 py-4 text-[#c5bdb1]">${formatarCNPJ(c.cnpj || "")}</td>
+            <td class="px-5 py-4 text-[#c5bdb1]">${c.telefone || ""}</td>
+            <td class="px-5 py-4 text-[#c5bdb1]">${c.email || ""}</td>
+            <td class="px-5 py-4 text-right flex gap-2 justify-end">
+                <button data-id="${c.id}" class="btn-ver inline-flex items-center justify-center rounded-full border border-[#3eb449]/25 bg-[#3eb449]/10 px-4 py-2 text-xs font-semibold text-[#c5bdb1] transition hover:bg-[#3eb449]/20">Ver</button>
+                <button data-id="${c.id}" class="btn-editar inline-flex items-center justify-center rounded-full border border-blue-400/25 bg-blue-400/10 px-4 py-2 text-xs font-semibold text-blue-300 transition hover:bg-blue-400/20">Editar</button>
+                <button data-id="${c.id}" class="btn-excluir inline-flex items-center justify-center rounded-full border border-rose-400/25 bg-rose-400/10 px-4 py-2 text-xs font-semibold text-rose-300 transition hover:bg-rose-400/20">Excluir</button>
+            </td>
+        `;
+        listaEl.appendChild(tr);
+    });
 };
 
-// ─── Detalhes ────────────────────────────────────────────────────────────────
 
 const mostrarDetalhes = (id) => {
     const c = clientes.find((x) => x.id === id);
@@ -140,7 +153,6 @@ const mostrarDetalhes = (id) => {
     `;
 };
 
-// ─── Modal de edição ─────────────────────────────────────────────────────────
 
 const abrirModalEditar = (id) => {
     const c = clientes.find((x) => x.id === id);
@@ -148,7 +160,6 @@ const abrirModalEditar = (id) => {
 
     clienteSendoEditado = id;
 
-    // Preenche os campos do formulário com os dados atuais
     formEditar.querySelector("#edit-nome-empresarial").value = c.nomeEmpresarial || "";
     formEditar.querySelector("#edit-cnpj").value             = formatarCNPJ(c.cnpj || "");
     formEditar.querySelector("#edit-indicador").value        = c.indicador || "";
@@ -167,7 +178,6 @@ const fecharModalEditar = () => {
     formEditar.reset();
 };
 
-// ─── Modal de exclusão ───────────────────────────────────────────────────────
 
 const abrirModalExcluir = (id) => {
     clienteSendoExcluido = id;
@@ -179,9 +189,6 @@ const fecharModalExcluir = () => {
     clienteSendoExcluido = null;
 };
 
-// ─── Eventos ─────────────────────────────────────────────────────────────────
-
-// Delegação de eventos na tabela
 listaEl.addEventListener("click", (event) => {
     const btn = event.target.closest("button");
     if (!btn) return;
@@ -192,13 +199,13 @@ listaEl.addEventListener("click", (event) => {
     if (btn.classList.contains("btn-excluir")) abrirModalExcluir(id);
 });
 
-// Fechar modal de edição
+
 btnFecharModal.addEventListener("click", fecharModalEditar);
 modalEditar.addEventListener("click", (e) => {
     if (e.target === modalEditar) fecharModalEditar();
 });
 
-// Submeter edição
+
 formEditar.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -233,7 +240,6 @@ formEditar.addEventListener("submit", async (e) => {
     }
 });
 
-// Confirmar exclusão
 btnConfirmarExcl.addEventListener("click", async () => {
     if (!clienteSendoExcluido) return;
 
@@ -259,12 +265,9 @@ modalExcluir.addEventListener("click", (e) => {
     if (e.target === modalExcluir) fecharModalExcluir();
 });
 
-// Busca
 buscarInput.addEventListener("input", (e) => {
     filtro = e.target.value;
     renderizarLista();
 });
-
-// ─── Init ────────────────────────────────────────────────────────────────────
 
 window.addEventListener("DOMContentLoaded", carregarClientes);
