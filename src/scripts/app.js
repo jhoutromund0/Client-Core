@@ -129,3 +129,65 @@ const inicializarPagina = async () => {
 };
 
 inicializarPagina();
+
+const openBtn =
+  document.getElementById(
+    "open-contact-modal"
+  );
+
+const modal =
+  document.getElementById(
+    "contact-modal"
+  );
+
+const closeBtn =
+  document.getElementById(
+    "close-contact-modal"
+  );
+
+const overlay =
+  document.getElementById(
+    "modal-overlay"
+  );
+
+// abrir
+openBtn.addEventListener(
+  "click",
+  () => {
+    modal.classList.remove("hidden");
+    document.body.style.overflow =
+      "hidden";
+  }
+);
+
+// fechar
+function closeModal() {
+  modal.classList.add("hidden");
+  document.body.style.overflow =
+    "auto";
+}
+
+closeBtn.addEventListener(
+  "click",
+  closeModal
+);
+
+overlay.addEventListener(
+  "click",
+  closeModal
+);
+
+// ESC fecha
+document.addEventListener(
+  "keydown",
+  (e) => {
+    if (
+      e.key === "Escape" &&
+      !modal.classList.contains(
+        "hidden"
+      )
+    ) {
+      closeModal();
+    }
+  }
+);

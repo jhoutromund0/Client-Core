@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Enviar Mensagem | Monitus</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module" src="./scripts/services/email.js"></script>
+<body class="bg-[#1a1c1a] text-[#f0f0f0] min-h-screen">
+
+  <!-- Navbar -->
+  <div id="monitus-nav-slot"></div>
+
+  <!-- Conteúdo -->
+  <main class="max-w-5xl mx-auto px-6 py-10">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white">
+        Enviar Mensagem
+      </h1>
+
+      <p class="text-[#8a9189] mt-2">
+        Envie mensagens em formato de email para clientes ou equipe.
+      </p>
+    </div>
+
+    <!-- Card principal -->
+    <section
+      class="bg-[#222522] border border-[#3eb449]/20 rounded-[2rem] shadow-xl p-8">
+
+      <!-- Destinatário -->
+      <!-- Destinatário -->
+    <div class="mb-6">
+    <label class="block mb-2 text-sm font-medium text-[#c7c7c7]">
+            Destinatário
+        </label>
+
+        <div
+            class="w-full bg-[#121412]
+            border border-[#3eb449]/15
+            rounded-2xl px-5 py-4
+            flex items-center justify-between">
+
+            <div>
+            <p class="text-white font-medium">
+                suporte@monitus.com.br
+            </p>
+
+            <span class="text-xs text-[#8a9189]">
+                Email padrão do sistema
+            </span>
+            </div>
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-[#3eb449]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+
+            <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 4.26a2 2 0 002.22
+                0L21 8m-18 8h18a2 2 0
+                002-2V8a2 2 0 00-2-2H3a2
+                2 0 00-2 2v6a2 2 0 002 2z" />
+            </svg>
+        </div>
+    </div>
+    <!-- Assunto -->
+        <input
+        id="assunto"
+        type="text"
+        placeholder="Digite o assunto do email"
+        class="w-full bg-[#171917] border border-[#3eb449]/20
+        rounded-2xl px-5 py-4 text-white
+        outline-none focus:border-[#3eb449]
+        transition"
+        />
+      <!-- Mensagem -->
+      <div class="mb-6">
+        <label class="block mb-2 text-sm font-medium text-[#c7c7c7]">
+          Mensagem
+        </label>
+
+        <textarea
+          id="mensagem"
+          rows="10"
+          placeholder="Escreva sua mensagem..."
+          class="w-full resize-none bg-[#171917]
+          border border-[#3eb449]/20
+          rounded-2xl px-5 py-4 text-white
+          outline-none focus:border-[#3eb449]
+          transition"></textarea>
+      </div>
+
+      <!-- Upload -->
+      <div class="mb-8">
+        <label class="block mb-2 text-sm font-medium text-[#c7c7c7]">
+          Anexos
+        </label>
+
+        <label
+          class="flex items-center justify-center w-full
+          border-2 border-dashed border-[#3eb449]/30
+          rounded-2xl p-8 cursor-pointer
+          hover:border-[#3eb449]
+          transition bg-[#171917]">
+
+          <div class="text-center">
+            <p class="text-[#8a9189]">
+              Clique para adicionar arquivos
+            </p>
+
+            <span class="text-sm text-[#5d645d]">
+              PDF, DOCX, XLSX, imagens...
+            </span>
+          </div>
+
+          <input type="file" class="hidden" multiple />
+        </label>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex justify-end gap-4">
+
+        <button
+          class="px-6 py-3 rounded-2xl
+          bg-[#2a2d2a]
+          hover:bg-[#333733]
+          transition text-white">
+
+          Cancelar
+        </button>
+
+        <button
+          id="send-email"
+          class="px-7 py-3 rounded-2xl
+          bg-[#3eb449]
+          hover:brightness-110
+          transition font-semibold text-[#101310]
+          shadow-lg shadow-[#3eb449]/20">
+
+          Enviar Mensagem
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+
+<script type="module" src="./scripts/home.js"></script>
+</html>

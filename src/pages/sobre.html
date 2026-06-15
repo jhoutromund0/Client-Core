@@ -15,29 +15,6 @@
     <script src="../scripts/accessibility.js" defer></script>
     <script src="../scripts/navigation.js" defer></script>
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --color-gold: #c5bdb1;
-            --color-dark: #1a1d26;
-            --color-darker: #0f1419;
-            --color-border: #333847;
-            --color-gray: #9ca3af;
-        }
-
-        .gold-glow {
-            box-shadow: 0 0 40px rgba(197, 189, 177, 0.12);
-        }
-
-        .glass-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            backdrop-filter: blur(10px);
-        }
-    </style>
 </head>
 
 <body class="bg-[#1a1d26] text-white antialiased overflow-x-hidden">
@@ -89,25 +66,25 @@
             <div>
 
                 <span class="text-[#c5bdb1] uppercase tracking-[0.2em] text-sm">
-                    -- Criação --
+                    O problema que vioru ideia
                 </span>
 
                 <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-8 leading-tight">
-                    -- Por que existe --
+                    Como surgiu
                 </h2>
 
                 <div class="space-y-6 text-[#9ca3af] text-lg leading-relaxed">
 
                     <p>
-                        -- Ah preencher --
+                        O Cliente Core nasceu da necessidade real de simplificar a gestão de clientes em empresas terceirizadas de TI.
                     </p>
 
                     <p>
-                        -- Ah preencher --
+                        Muitas dessas empresas ainda operam com processos fragmentados,planilhas, sistemas genéricos e informações espalhadas entre equipes.
                     </p>
 
                     <p>
-                        -- Ah preencher --
+                        O Cliente Core existe para centralizar tudo isso em um único lugar: dados de clientes, organização operacional e automação de cadastros, permitindo que empresas de TI foquem no que realmente importa.
                     </p>
 
                 </div>
@@ -134,7 +111,7 @@
                         </h3>
 
                         <p class="text-[#9ca3af] leading-relaxed">
-                            Clientes, estoque, visitas técnicas e cobranças
+                            Clientes, estoque e visitas técnicas
                             em um único ambiente.
                         </p>
                     </div>
@@ -185,7 +162,7 @@
                     </h3>
 
                     <p class="text-[#9ca3af] leading-relaxed">
-                        -- Ah preencher --
+                        Simplificar e centralizar a gestão de clientes de empresas terceirizadas de TI, automatizando processos e aumentando a eficiência operacional através de tecnologia acessível e inteligente.
                     </p>
                 </div>
 
@@ -200,7 +177,7 @@
                     </h3>
 
                     <p class="text-[#9ca3af] leading-relaxed">
-                        -- Ah preencher --
+                        Ser a principal plataforma de gestão para empresas de TI terceirizadas na América Latina, transformando a forma como essas empresas organizam, atendem e escalam suas operações.
                     </p>
                 </div>
 
@@ -214,9 +191,11 @@
                        Valores
                     </h3>
 
-                    <p class="text-[#9ca3af] leading-relaxed">
-                        -- Ah preencher --
-                    </p>
+                    <p class="text-[#9ca3af] leading-relaxed">Foco no cliente final</p>
+                    <p class="text-[#9ca3af] leading-relaxed"> Simplicidade acima de tudo</p>    
+                    <p class="text-[#9ca3af] leading-relaxed">Eficiência operacional</p>
+                    <p class="text-[#9ca3af] leading-relaxed">Centralização da informação</p>
+                    <p class="text-[#9ca3af] leading-relaxed">Inovação prática</p>
                 </div>
 
             </div>
@@ -243,7 +222,7 @@
                 tudo organizado sem burocracia.
             </p>
 
-            <div class="grid md:grid-cols-4 gap-6">
+            <div class="grid md:grid-cols-3 gap-6">
 
                 <div class="glass-card rounded-[28px] p-8">
                     <div class="text-4xl mb-4">🏢</div>
@@ -275,16 +254,6 @@
                     </p>
                 </div>
 
-                <div class="glass-card rounded-[28px] p-8">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h4 class="font-semibold mb-3">
-                        Cobranças
-                    </h4>
-                    <p class="text-[#9ca3af] text-sm">
-                        Defina valores e acompanhe serviços.
-                    </p>
-                </div>
-
             </div>
 
         </div>
@@ -310,13 +279,187 @@
                         e foque no que realmente importa: seus clientes.
                     </p>
 
-                    <button class="bg-[#c5bdb1] text-[#1a1d26] hover:bg-[#d7cec2] px-10 py-5 rounded-2xl font-semibold transition gold-glow">
+                    <button
+                        id="open-contact-modal"
+                        class="bg-[#c5bdb1]
+                        text-[#1a1d26]
+                        hover:bg-[#d7cec2]
+                        px-10 py-5
+                        rounded-2xl
+                        font-semibold
+                        transition
+                        gold-glow">
+
                         Entre em contato
                     </button>
 
                 </div>
 
+                    <!-- CONTACT MODAL -->
+<div
+  id="contact-modal"
+  class="fixed inset-0 z-[9999] hidden">
+
+  <!-- Overlay -->
+  <div
+    id="modal-overlay"
+    class="absolute inset-0 bg-black/70 backdrop-blur-sm">
+  </div>
+
+  <!-- Modal -->
+        <div class="flex items-center justify-center min-h-screen px-4 py-6">
+
+        <div
+            class="relative w-full max-w-[680px]
+            bg-[#11151d]
+            border border-[#333847]
+            rounded-[32px]
+            overflow-hidden
+            shadow-2xl">
+
+            <!-- Glow -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[220px] h-[90px] bg-[#c5bdb1]/10 blur-[70px]"></div>
+
+            <!-- Header -->
+            <div class="relative px-8 pt-8 pb-6 border-b border-[#333847]">
+
+            <button
+                id="close-contact-modal"
+                class="absolute right-5 top-5 text-[#9ca3af] hover:text-white transition text-lg">
+
+                ✕
+            </button>
+
+            <span class="text-[#c5bdb1] uppercase tracking-[0.18em] text-xs">
+                Contato Comercial
+            </span>
+
+            <h2 class="text-3xl font-bold mt-3">
+                Fale com nossa equipe
+            </h2>
+
+            <p class="text-[#9ca3af] text-sm mt-3 leading-relaxed max-w-xl">
+                Entre em contato para validar planos,
+                esclarecer dúvidas e confirmar os
+                serviços ideais para sua operação.
+            </p>
+
             </div>
+
+            <!-- Form -->
+            <div class="p-8 space-y-5">
+
+            <!-- Nome + Empresa -->
+            <div class="grid md:grid-cols-2 gap-4">
+
+                <div>
+                <label class="block mb-2 text-sm text-[#9ca3af]">
+                    Nome
+                </label>
+
+                <input
+                    id="nome"
+                    type="text"
+                    placeholder="Seu nome"
+                    class="w-full bg-[#0f1419]
+                    border border-[#333847]
+                    rounded-xl px-4 py-3
+                    text-sm
+                    outline-none
+                    focus:border-[#c5bdb1]
+                    transition"/>
+                </div>
+
+                <div>
+                <label class="block mb-2 text-sm text-[#9ca3af]">
+                    Empresa
+                </label>
+
+                <input
+                    id="empresa"
+                    type="text"
+                    placeholder="Empresa"
+                    class="w-full bg-[#0f1419]
+                    border border-[#333847]
+                    rounded-xl px-4 py-3
+                    text-sm
+                    outline-none
+                    focus:border-[#c5bdb1]
+                    transition"/>
+                </div>
+
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block mb-2 text-sm text-[#9ca3af]">
+                E-mail
+                </label>
+
+                <input
+                id="email"
+                type="email"
+                placeholder="seu@email.com"
+                class="w-full bg-[#0f1419]
+                border border-[#333847]
+                rounded-xl px-4 py-3
+                text-sm
+                outline-none
+                focus:border-[#c5bdb1]
+                transition"/>
+            </div>
+
+            <!-- Mensagem -->
+            <div>
+                <label class="block mb-2 text-sm text-[#9ca3af]">
+                Mensagem
+                </label>
+
+                <textarea
+                id="mensagem"
+                rows="4"
+                placeholder="Descreva sua necessidade..."
+                class="w-full bg-[#0f1419]
+                border border-[#333847]
+                rounded-xl px-4 py-3
+                text-sm
+                resize-none
+                outline-none
+                focus:border-[#c5bdb1]
+                transition"></textarea>
+            </div>
+
+            <!-- Footer -->
+            <div class="pt-2 flex justify-end gap-3">
+
+                <button
+                id="close-contact-modal-2"
+                class="px-5 py-3 rounded-xl
+                border border-[#333847]
+                text-[#9ca3af]
+                hover:text-white transition">
+
+                Cancelar
+                </button>
+
+                <button
+                id="send-email"
+                class="bg-[#c5bdb1]
+                hover:bg-[#d7cec2]
+                text-[#111827]
+                font-semibold
+                px-6 py-3
+                rounded-xl
+                transition">
+
+                Enviar
+                </button>
+
+            </div>
+            </div>
+        </div>
+        </div>
+          </div>
 
         </div>
     </section>
