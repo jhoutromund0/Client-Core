@@ -73,13 +73,15 @@
       </div>
 
       <section class="rounded-[1.5rem] border border-[#3eb449]/15 bg-[#141716]/85 p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)]">
-        <div class="mb-6 flex items-center justify-between gap-5">
-          <h2 class="text-2xl font-bold text-white">Visitas do dia</h2>
-          <p id="data-selecionada" class="text-sm text-[#c5bdb1]/70"></p>
-        </div>
-        <div id="visitas-do-dia" class="space-y-4"></div>
-      </section>
-    </section>
+  <div class="mb-6 flex items-center justify-between gap-5">
+    <h2 class="text-2xl font-bold text-white">Todas as visitas agendadas</h2>
+  </div>
+
+  <div
+    id="visitas-do-dia"
+    class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  </div>
+</section>
   </main>
 
   <div id="modal-agendar" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
@@ -110,8 +112,7 @@
         </label>
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">Materiais necessários</span>
-          <select id="visita-materiais" multiple class="h-40 w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20"></select>
-          <p class="text-xs text-[#c5bdb1]/70">Segure Ctrl/Cmd ou Shift para selecionar mais de um material.</p>
+          <textarea id="visita-materiais" multiple class="h-40 w-full rounded-3xl border border-[#3eb449]/20 bg-[#111314] px-5 py-3 text-sm text-white outline-none transition focus:border-[#3eb449] focus:ring-2 focus:ring-[#3eb449]/20"></textarea>
         </label>
         <label class="space-y-2 text-sm text-[#c5bdb1]/90">
           <span class="font-medium text-[#f8faf7]">Técnico(s)</span>

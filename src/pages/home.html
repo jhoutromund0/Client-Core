@@ -69,9 +69,9 @@
                         Criar conta grátis
                     </a>
 
-                    <button class="border border-[#333847] hover:border-[#c5bdb1]/30 hover:bg-white/[0.03] text-[#d1d5db] hover:text-[#c5bdb1] px-8 py-4 rounded-2xl font-semibold transition">
+                    <a href="../pages/clients/monitus.html" class="border border-[#333847] hover:border-[#c5bdb1]/30 hover:bg-white/[0.03] text-[#d1d5db] hover:text-[#c5bdb1] px-8 py-4 rounded-2xl font-semibold transition">
                         Ver demonstração
-                    </button>
+                    </a>
                 </div>
 
                 <div class="flex flex-wrap gap-6 text-sm text-[#9ca3af]">
@@ -103,7 +103,7 @@
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h3 class="font-semibold text-lg">
-                                Dashboard Cliente Core
+                                Dashboard
                             </h3>
 
                             <p class="text-[#6b7280] text-sm">
@@ -123,12 +123,8 @@
                         <div class="glass-card rounded-3xl p-5 col-span-2">
                             <div class="flex items-center justify-between mb-5">
                                 <h4 class="font-medium">
-                                    Cliente encontrado
+                                    Client Core 
                                 </h4>
-
-                                <span class="text-green-400 text-sm">
-                                    ● conectado
-                                </span>
                             </div>
 
                             <div class="bg-[#1a1d26] rounded-2xl p-4 border border-[#333847]">
@@ -238,7 +234,7 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
 
                 <div class="glass-card rounded-[32px] p-8 hover:border-[#c5bdb1]/20 transition">
                     <div class="w-14 h-14 rounded-2xl bg-[#c5bdb1]/10 flex items-center justify-center mb-6">
@@ -281,21 +277,6 @@
                         Organize visitas técnicas e acompanhe serviços.
                     </p>
                 </div>
-
-                <div class="glass-card rounded-[32px] p-8 hover:border-[#c5bdb1]/20 transition">
-                    <div class="w-14 h-14 rounded-2xl bg-[#c5bdb1]/10 flex items-center justify-center mb-6">
-                        💰
-                    </div>
-
-                    <h3 class="text-xl font-semibold mb-4">
-                        Cobrança simplificada
-                    </h3>
-
-                    <p class="text-[#9ca3af] leading-relaxed">
-                        Defina valores de atendimento e acompanhe cobranças.
-                    </p>
-                </div>
-
             </div>
         </div>
     </section>
@@ -370,7 +351,7 @@
     </section>
 
     <!-- CTA -->
-    <section class="px-6 pb-28">
+    <section id="contato" class="px-6 pb-28">
 
         <div class="max-w-7xl mx-auto">
 
@@ -388,12 +369,159 @@
                         Pare de perder tempo com planilhas e cadastros manuais.
                     </p>
 
-                <a href="/pages/cadastro.html" class="inline-block bg-[#c5bdb1] text-[#1a1d26] hover:bg-[#d7cec2] px-10 py-5 rounded-2xl font-semibold transition gold-glow">
-                    Criar conta grátis
-                </a>
+                    <!-- Modal -->
+                                <div class="flex items-center justify-center min-h-screen px-4 py-6">
 
+                                <div
+                                    class="relative w-full max-w-[680px]
+                                    bg-[#11151d]
+                                    border border-[#333847]
+                                    rounded-[32px]
+                                    overflow-hidden
+                                    shadow-2xl">
+
+                                    <!-- Glow -->
+                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[220px] h-[90px] bg-[#c5bdb1]/10 blur-[70px]"></div>
+
+                                    <!-- Header -->
+                                    <div class="relative px-8 pt-8 pb-6 border-b border-[#333847]">
+
+                                    <button
+                                        id="close-contact-modal"
+                                        class="absolute right-5 top-5 text-[#9ca3af] hover:text-white transition text-lg">
+
+                                        ✕
+                                    </button>
+
+                                    <span class="text-[#c5bdb1] uppercase tracking-[0.18em] text-xs">
+                                        Contato Comercial
+                                    </span>
+
+                                    <h2 class="text-3xl font-bold mt-3">
+                                        Fale com nossa equipe
+                                    </h2>
+
+                                    <p class="text-[#9ca3af] text-sm mt-3 leading-relaxed max-w-xl">
+                                        Entre em contato para validar planos,
+                                        esclarecer dúvidas e confirmar os
+                                        serviços ideais para sua operação.
+                                    </p>
+
+                                    </div>
+
+                                    <!-- Form -->
+                                    <div class="p-8 space-y-5">
+
+                                    <!-- Nome + Empresa -->
+                                    <div class="grid md:grid-cols-2 gap-4">
+
+                                        <div>
+                                        <label class="block mb-2 text-sm text-[#9ca3af]">
+                                            Nome
+                                        </label>
+
+                                        <input
+                                            id="nome"
+                                            type="text"
+                                            placeholder="Seu nome"
+                                            class="w-full bg-[#0f1419]
+                                            border border-[#333847]
+                                            rounded-xl px-4 py-3
+                                            text-sm
+                                            outline-none
+                                            focus:border-[#c5bdb1]
+                                            transition"/>
+                                        </div>
+
+                                        <div>
+                                        <label class="block mb-2 text-sm text-[#9ca3af]">
+                                            Empresa
+                                        </label>
+
+                                        <input
+                                            id="empresa"
+                                            type="text"
+                                            placeholder="Empresa"
+                                            class="w-full bg-[#0f1419]
+                                            border border-[#333847]
+                                            rounded-xl px-4 py-3
+                                            text-sm
+                                            outline-none
+                                            focus:border-[#c5bdb1]
+                                            transition"/>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div>
+                                        <label class="block mb-2 text-sm text-[#9ca3af]">
+                                        E-mail
+                                        </label>
+
+                                        <input
+                                        id="email"
+                                        type="email"
+                                        placeholder="seu@email.com"
+                                        class="w-full bg-[#0f1419]
+                                        border border-[#333847]
+                                        rounded-xl px-4 py-3
+                                        text-sm
+                                        outline-none
+                                        focus:border-[#c5bdb1]
+                                        transition"/>
+                                    </div>
+
+                                    <!-- Mensagem -->
+                                    <div>
+                                        <label class="block mb-2 text-sm text-[#9ca3af]">
+                                        Mensagem
+                                        </label>
+
+                                        <textarea
+                                        id="mensagem"
+                                        rows="4"
+                                        placeholder="Descreva sua necessidade..."
+                                        class="w-full bg-[#0f1419]
+                                        border border-[#333847]
+                                        rounded-xl px-4 py-3
+                                        text-sm
+                                        resize-none
+                                        outline-none
+                                        focus:border-[#c5bdb1]
+                                        transition"></textarea>
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="pt-2 flex justify-end gap-3">
+
+                                        <button
+                                        id="close-contact-modal-2"
+                                        class="px-5 py-3 rounded-xl
+                                        border border-[#333847]
+                                        text-[#9ca3af]
+                                        hover:text-white transition">
+
+                                        Cancelar
+                                        </button>
+
+                                        <button
+                                        id="send-email"
+                                        class="bg-[#c5bdb1]
+                                        hover:bg-[#d7cec2]
+                                        text-[#111827]
+                                        font-semibold
+                                        px-6 py-3
+                                        rounded-xl
+                                        transition">
+
+                                        Enviar
+                                         </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </section>

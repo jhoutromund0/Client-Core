@@ -2,6 +2,7 @@ import {
   collection,
   addDoc,
   deleteDoc,
+  updateDoc,
   doc,
   getDocs,
   orderBy,
@@ -31,6 +32,7 @@ const formVisita = document.getElementById("form-visita");
 const visitaDataInput = document.getElementById("visita-data");
 const visitaClienteInput = document.getElementById("visita-cliente");
 const visitaTipoInput = document.getElementById("visita-tipo");
+const visitaDescricaoInput = document.getElementById("visita-descricao");
 const visitaMateriaisInput = document.getElementById("visita-materiais");
 const visitaTecnicosInput = document.getElementById("visita-tecnicos");
 const modalStatus = document.getElementById("modal-status");
@@ -40,6 +42,7 @@ const nextMonthButton = document.getElementById("next-month");
 const clientesList = document.getElementById("clientes-list");
 
 let materiaisDisponiveis = [];
+let editandoVisitaId = null;
 
 const state = {
   year: new Date().getFullYear(),
@@ -101,7 +104,7 @@ const obterVisitas = async () => {
 
     atualizarResumo();
     renderizarCalendario();
-    renderizarVisitasDoDia(state.selectedDate || new Date());
+    renderizarVisitasDoDia();
     atualizarStatus("Agenda atualizada.");
   } catch (error) {
     console.error("Erro ao carregar visitas:", error);
@@ -188,43 +191,83 @@ const renderizarCalendario = () => {
   }
 };
 
-const renderizarVisitasDoDia = (date) => {
-  state.selectedDate = date;
+const renderizarVisitasDoDia = () => {
 
-  const lista = visitasFiltradas().filter((visita) => isSameDate(visita.scheduledAt, date));
-  const descricaoData = date ? formatarData(date) : "";
+  const lista = visitasFiltradas();
 
-  dataSelecionadaLabel.textContent = descricaoData;
   visitasDoDia.innerHTML = "";
 
-  if (lista.length === 0) {
-    visitasDoDia.innerHTML = `<div class="rounded-[1.5rem] border border-[#3eb449]/10 bg-[#0f1419]/80 p-6 text-sm text-[#c5bdb1]">Nenhuma visita agendada para este dia.</div>`;
+  if (!lista.length) {
+    visitasDoDia.innerHTML = `
+      <div class="rounded-[1.5rem] border border-[#3eb449]/10 bg-[#0f1419]/80 p-6 text-sm text-[#c5bdb1]">
+        Nenhuma visita cadastrada.
+      </div>
+    `;
     return;
   }
 
   lista.forEach((visita) => {
+
     const card = document.createElement("div");
-    card.className = "rounded-[1.5rem] border border-[#3eb449]/10 bg-[#0f1419]/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.2)]";
+
+    card.className =
+      "rounded-[1.5rem] border border-[#3eb449]/10 bg-[#0f1419]/80 p-5";
+
     card.innerHTML = `
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <p class="text-sm uppercase tracking-[0.22em] text-[#7cf887]">${visita.clienteNome}</p>
-          <h3 class="mt-2 text-lg font-semibold text-white">${visita.descricao}</h3>
+      <div class="flex justify-between items-start gap-4">
+
+        <div class="flex-1">
+
+          <p class="text-[#7cf887] text-xs uppercase tracking-[0.18em]">
+            ${formatarData(visita.scheduledAt)}
+          </p>
+
+          <h3 class="mt-2 text-lg font-semibold text-white">
+            ${visita.clienteNome}
+          </h3>
+
+          <p class="mt-3 text-sm text-[#c5bdb1]">
+            ${visita.descricao}
+          </p>
+
+          <div class="mt-4">
+            <p class="text-white font-semibold">
+              Materiais
+            </p>
+
+            <p class="text-[#c5bdb1] text-sm">
+              ${visita.materiais || "Não informado"}
+            </p>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-white font-semibold">
+              Técnicos
+            </p>
+
+            <p class="text-[#c5bdb1] text-sm">
+              ${visita.tecnicos || "Não informado"}
+            </p>
+          </div>
+
         </div>
+
       </div>
-      <div class="mt-4 grid gap-3 sm:grid-cols-2">
-        <div class="rounded-3xl border border-[#3eb449]/10 bg-[#111314]/80 p-4 text-sm text-[#c5bdb1]">
-          <p class="font-semibold text-white">Materiais</p>
-          <p class="mt-2 whitespace-pre-line">${visita.materiais || "Não informado"}</p>
-        </div>
-        <div class="rounded-3xl border border-[#3eb449]/10 bg-[#111314]/80 p-4 text-sm text-[#c5bdb1]">
-          <p class="font-semibold text-white">Técnico(s)</p>
-          <p class="mt-2">${visita.tecnicos || "Não informado"}</p>
-        </div>
-      </div>
-      <div class="mt-4 flex items-center justify-between gap-3 text-xs text-[#c5bdb1]">
-        <span>Agendada para ${descricaoData}</span>
-        <button type="button" data-id="${visita.id}" class="remover-visita rounded-3xl border border-[#ef4444]/20 bg-[#ef4444]/10 px-4 py-2 font-semibold text-[#fca5a5] transition hover:bg-[#ef4444]/20">Excluir</button>
+
+      <div class="mt-5 flex gap-2">
+
+        <button
+          class="editar-visita rounded-3xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white"
+          data-id="${visita.id}">
+          Editar
+        </button>
+
+        <button
+          class="remover-visita rounded-3xl bg-red-600 px-4 py-2 text-sm font-semibold text-white"
+          data-id="${visita.id}">
+          Excluir
+        </button>
+
       </div>
     `;
 
@@ -232,14 +275,47 @@ const renderizarVisitasDoDia = (date) => {
   });
 };
 
-const abrirModal = (date) => {
+const editarVisita = (visita) => {
+
+  editandoVisitaId = visita.id;
+
   modal.classList.remove("hidden");
-  modalDataLabel.textContent = `Data selecionada: ${formatarData(date)}`;
+
+  modalDataLabel.textContent =
+    `Editando visita de ${visita.clienteNome}`;
+
+  visitaDataInput.value =
+    visita.scheduledAt.toISOString();
+
+  visitaClienteInput.value =
+    visita.clienteNome;
+
+  visitaTipoInput.value =
+    visita.descricao;
+
+  visitaMateriaisInput.value =
+    visita.materiais || "";
+
+  visitaTecnicosInput.value =
+    visita.tecnicos || "";
+};
+
+const abrirModal = (date) => {
+
+  editandoVisitaId = null;
+
+  modal.classList.remove("hidden");
+
+  modalDataLabel.textContent =
+    `Data selecionada: ${formatarData(date)}`;
+
   visitaDataInput.value = date.toISOString();
+
   visitaClienteInput.value = "";
-  visitaDescricaoInput.value = "";
+  visitaTipoInput.value = "";
   visitaMateriaisInput.value = "";
   visitaTecnicosInput.value = "";
+
   modalStatus.textContent = "";
 };
 
@@ -248,43 +324,92 @@ const fecharModal = () => {
 };
 
 const salvarVisita = async (evento) => {
+
   evento.preventDefault();
-  const dataSelecionada = new Date(visitaDataInput.value);
-  const clienteNome = visitaClienteInput.value.trim();
-  const descricao = visitaDescricaoInput.value.trim();
-  const materiais = visitaMateriaisInput.value.trim();
-  const tecnicos = visitaTecnicosInput.value.trim();
+
+  const dataSelecionada =
+    new Date(visitaDataInput.value);
+
+  const clienteNome =
+    visitaClienteInput.value.trim();
+
+  const descricao =
+    visitaTipoInput.value;
+
+  const materiais =
+    visitaMateriaisInput.value.trim();
+
+  const tecnicos =
+    visitaTecnicosInput.value.trim();
 
   if (!clienteNome || !descricao) {
-    modalStatus.textContent = "Informe o cliente e a descrição da visita.";
+
+    modalStatus.textContent =
+      "Informe cliente e serviço.";
+
     return;
   }
 
-  const clienteEncontrado = state.clientes.find((cliente) => cliente.nome === clienteNome);
-  const clienteId = clienteEncontrado ? clienteEncontrado.id : "";
+  const clienteEncontrado =
+    state.clientes.find(
+      cliente => cliente.nome === clienteNome
+    );
+
+  const clienteId =
+    clienteEncontrado?.id || "";
 
   try {
-    modalStatus.textContent = "Salvando visita...";
-    await addDoc(visitasRef, {
-      clienteNome,
-      clienteId,
-      descricao,
-      materiais,
-      tecnicos,
-      scheduledAt: Timestamp.fromDate(dataSelecionada),
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now()
-    });
+
+    modalStatus.textContent =
+      "Salvando...";
+
+    if (editandoVisitaId) {
+
+      await updateDoc(
+        doc(db, "visitas", editandoVisitaId),
+        {
+          clienteNome,
+          clienteId,
+          descricao,
+          materiais,
+          tecnicos,
+          scheduledAt:
+            Timestamp.fromDate(dataSelecionada),
+          updatedAt:
+            Timestamp.now()
+        }
+      );
+
+    } else {
+
+      await addDoc(visitasRef, {
+        clienteNome,
+        clienteId,
+        descricao,
+        materiais,
+        tecnicos,
+        scheduledAt:
+          Timestamp.fromDate(dataSelecionada),
+        createdAt:
+          Timestamp.now(),
+        updatedAt:
+          Timestamp.now()
+      });
+
+    }
+
+    editandoVisitaId = null;
 
     fecharModal();
+
     await obterVisitas();
-    if (state.filtroCliente) {
-      renderizarCalendario();
-      renderizarVisitasDoDia(state.selectedDate || new Date());
-    }
+
   } catch (error) {
-    console.error("Erro ao salvar visita:", error);
-    modalStatus.textContent = "Não foi possível salvar a visita.";
+
+    console.error(error);
+
+    modalStatus.textContent =
+      "Erro ao salvar visita.";
   }
 };
 
@@ -313,7 +438,7 @@ const aplicarFiltro = () => {
   state.filtroCliente = buscaClienteInput.value.trim();
   atualizarResumo();
   renderizarCalendario();
-  renderizarVisitasDoDia(state.selectedDate || new Date());
+  renderizarVisitasDoDia();
 };
 
 const selecionarDia = (date) => {
@@ -360,15 +485,43 @@ calendarioGrid.addEventListener("click", (event) => {
   abrirModal(date);
 });
 
-visitasDoDia.addEventListener("click", async (event) => {
-  const botao = event.target.closest("button.remover-visita");
-  if (!botao) return;
-  const id = botao.dataset.id;
-  const confirmar = window.confirm("Deseja excluir esta visita?");
-  if (confirmar) {
-    await removerVisita(id);
+visitasDoDia.addEventListener(
+  "click",
+  async (event) => {
+
+    const remover =
+      event.target.closest(".remover-visita");
+
+    if (remover) {
+
+      const confirmar =
+        confirm("Excluir visita?");
+
+      if (confirmar) {
+        await removerVisita(
+          remover.dataset.id
+        );
+      }
+
+      return;
+    }
+
+    const editar =
+      event.target.closest(".editar-visita");
+
+    if (editar) {
+
+      const visita =
+        state.visitas.find(
+          v => v.id === editar.dataset.id
+        );
+
+      if (visita) {
+        editarVisita(visita);
+      }
+    }
   }
-});
+);
 
 fecharModalButton.addEventListener("click", fecharModal);
 modal.addEventListener("click", (event) => {
