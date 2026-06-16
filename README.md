@@ -1,90 +1,80 @@
-# Client-Core
-Projeto do 3º Semestre da faculdade de Tecnologia em Análise e Desenvolvimento de Sistemas
+# 🚀 Client Core
 
-## Descrição
-Repositório com a aplicação front-end e funções Firebase usadas no projeto.
+Plataforma SaaS para Gestão e Automação de Serviços de TI.
 
-## Pré-requisitos
-- Node.js instalado (recomendado 18.x ou superior)
-- npm instalado (vem com Node.js)
-- Firebase CLI instalado globalmente
-- Conta Firebase configurada se quiser rodar deploy ou emuladores
+## 📖 Sobre o Projeto
 
-## Instalação
-1. Clone o repositório:
+O **Client Core** é uma plataforma desenvolvida para centralizar e automatizar processos de empresas prestadoras de serviços de Tecnologia da Informação. O sistema foi criado para solucionar problemas relacionados à gestão manual de clientes, chamados técnicos e organização operacional, proporcionando maior produtividade e eficiência.
 
-   ```bash
-   git clone https://github.com/jhoutromund0/Client-Core.git
-   cd Client-Core
-   ```
+A plataforma permite:
 
-2. Instale as dependências principais:
+* 👥 Gerenciamento de clientes
+* ⚙️ Automação de tarefas operacionais
+* 📊 Organização e centralização de dados
+* 📅 Acompanhamento de atendimentos e serviços
+* ☁️ Acesso via navegador com infraestrutura em nuvem
 
-   ```bash
-   npm install
-   ```
+## 🎯 Objetivo
 
-3. Instale as dependências das funções Firebase:
+Oferecer uma solução simples, intuitiva e especializada para empresas de TI e profissionais autônomos que precisam gerenciar múltiplos clientes e demandas simultaneamente.
 
-   ```bash
-   cd functions
-   npm install
-   cd ..
-   ```
+## 🛠️ Tecnologias Utilizadas
 
-## Rodando localmente
-### Opção 1: Usar servidor local simples
-Como o projeto não possui script de build configurado, você pode usar qualquer servidor estático local, por exemplo o Live Server do VS Code, ou instalar um servidor simples:
+### Front-end
 
-```bash
-npm install -g serve
-serve public
-```
+* HTML5
+* CSS3
+* JavaScript
+* Tailwind CSS
 
-Abra o navegador em `http://localhost:3000` ou na porta exibida pelo servidor.
+### Back-end e Infraestrutura
 
-### Opção 2: Usar Firebase emulador de funções
-Se quiser testar as `functions` localmente:
+* Firebase
+* Cloud Functions
+* Firebase Hosting
 
-1. Instale o Firebase CLI globalmente (se ainda não tiver):
+### Ferramentas de Desenvolvimento
 
-   ```bash
-   npm install -g firebase-tools
-   ```
+* Git
+* GitHub
+* npm
 
-2. Faça login no Firebase:
-
-   ```bash
-   firebase login
-   ```
-
-3. Inicie o emulador de funções dentro da pasta `functions`:
-
-   ```bash
-   cd functions
-   npm run serve
-   ```
-
-## Estrutura do projeto
-- `pages/` - páginas HTML do cliente
-- `public/` - arquivos públicos para hospedagem
-- `components/` - componentes HTML reutilizáveis
-- `scripts/` - scripts JavaScript do front-end
-- `src/` - CSS e serviços auxiliares
-- `functions/` - Cloud Functions Firebase
-- `firebase.json` - configuração de hospedagem e funções Firebase
-
-## Deploy
-Para fazer deploy no Firebase hospedagem e funções, use:
+## 📂 Estrutura do Projeto
 
 ```bash
-firebase deploy
+Client-Core/
+├── functions/        # Cloud Functions Firebase
+├── public/           # Arquivos públicos e hospedagem
+├── src/              # Estilos e serviços auxiliares
+├── assets/           # Recursos estáticos
+├── package.json
+├── firebase.json
+└── README.md
 ```
 
-> Antes de fazer deploy, verifique se você já configurou o projeto Firebase local com `firebase init` e se está autenticado.
+## 🎯 Público-Alvo
 
-## Observações
-- O `package.json` principal contém dependências de CSS/Tailwind e Firebase.
-- O `functions/package.json` contém dependências do backend Firebase.
-- Se precisar editar ou compilar CSS, verifique se há um fluxo de build manual para Tailwind ou PostCSS no projeto.
+* Empresas de Tecnologia da Informação
+* Empresas de Infraestrutura de TI
+* Profissionais autônomos da área de tecnologia
 
+## 💡 Diferenciais
+
+* Plataforma especializada em serviços de TI
+* Interface simples e intuitiva
+* Centralização das informações
+* Automação de processos operacionais
+* Escalabilidade em nuvem
+* Foco em produtividade e organização
+
+## 📈 Visão
+
+Ser uma plataforma de referência na gestão de serviços de TI, auxiliando empresas e profissionais na transformação digital de seus processos.
+
+## 👨‍💻 Equipe
+
+* Davi Maia Reis
+* Jhonata Adriano
+* Matheus Martins Souza
+
+Projeto desenvolvido para o 3º semestre do curso de Tecnologia em Análise e Desenvolvimento de Sistemas.
